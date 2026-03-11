@@ -12,8 +12,6 @@ html{scroll-behavior:smooth;}
 body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
 .cursor{width:10px;height:10px;background:var(--lime);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:transform 0.15s ease;mix-blend-mode:difference;}
 .cursor-ring{width:34px;height:34px;border:1.5px solid rgba(200,255,0,0.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;}
-
-/* LOADER */
 #loader{position:fixed;inset:0;background:var(--black);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease;}
 #loader.hide{opacity:0;visibility:hidden;}
 .loader-logo{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:8px;color:var(--white);animation:loaderPulse 1.2s ease-in-out infinite;}
@@ -22,8 +20,6 @@ body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif
 .loader-fill{height:100%;background:var(--lime);width:0%;transition:width 0.05s linear;}
 .loader-txt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:16px;}
 @keyframes loaderPulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
-
-/* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 52px;transition:background 0.4s;}
 nav.scrolled{background:rgba(8,8,8,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
 .logo-mark{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;text-decoration:none;color:var(--white);}
@@ -32,26 +28,21 @@ nav ul{list-style:none;display:flex;gap:28px;align-items:center;}
 nav ul a{color:var(--white);text-decoration:none;font-size:11px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;opacity:0.6;transition:opacity 0.2s;}
 nav ul a:hover{opacity:1;}
 .nav-cta{background:var(--lime)!important;color:var(--black)!important;opacity:1!important;padding:10px 24px;font-weight:700!important;}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
-.hamburger span{width:24px;height:2px;background:var(--white);transition:all 0.3s;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none;}
+.hamburger span{width:24px;height:2px;background:var(--white);display:block;}
 .mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
 .mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--white);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:4px;opacity:0.7;transition:opacity 0.2s,color 0.2s;}
+.mobile-menu a{color:var(--white);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:4px;opacity:0.7;transition:opacity 0.2s;}
 .mobile-menu a:hover{opacity:1;color:var(--lime);}
 .mobile-close{position:absolute;top:28px;right:28px;background:transparent;border:none;color:var(--white);font-size:28px;cursor:pointer;}
-
-/* FLOATING BUTTONS */
 .float-cta{position:fixed;bottom:32px;right:32px;z-index:400;background:var(--lime);color:var(--black);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 28px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(200,255,0,0.35);transition:transform 0.2s,box-shadow 0.2s,opacity 0.3s;opacity:0;pointer-events:none;}
 .float-cta.show{opacity:1;pointer-events:all;}
-.float-cta:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(200,255,0,0.4);}
+.float-cta:hover{transform:translateY(-3px);}
 .float-dot{width:7px;height:7px;background:var(--black);border-radius:50%;animation:pdot 1.5s ease-in-out infinite;}
 @keyframes pdot{0%,100%{transform:scale(1);}50%{transform:scale(1.5);opacity:0.5;}}
-.sms-btn{position:fixed;bottom:32px;left:32px;z-index:400;background:var(--gray);color:var(--white);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 22px;display:flex;align-items:center;gap:10px;border:1px solid rgba(244,240,232,0.12);box-shadow:0 8px 32px rgba(0,0,0,0.4);transition:transform 0.2s,border-color 0.2s,opacity 0.3s;opacity:0;pointer-events:none;}
+.sms-btn{position:fixed;bottom:32px;left:32px;z-index:400;background:var(--gray);color:var(--white);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 22px;display:flex;align-items:center;gap:10px;border:1px solid rgba(244,240,232,0.12);transition:transform 0.2s,border-color 0.2s,opacity 0.3s;opacity:0;pointer-events:none;}
 .sms-btn.show{opacity:1;pointer-events:all;}
 .sms-btn:hover{transform:translateY(-3px);border-color:var(--lime);color:var(--lime);}
-.sms-icon{font-size:16px;}
-
-/* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:130px 52px 100px;position:relative;overflow:hidden;}
 .hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 85% 45%,rgba(200,255,0,0.07) 0%,transparent 65%);pointer-events:none;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.1s forwards;}
@@ -69,25 +60,17 @@ nav ul a:hover{opacity:1;}
 .hnum{text-align:right;}
 .hnum-val{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--lime);line-height:1;}
 .hnum-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
-
-/* TICKER */
 .ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;background:var(--gray);}
 .ticker-track{display:flex;width:max-content;animation:ticker 22s linear infinite;}
 .ticker-item{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;padding:0 36px;color:rgba(244,240,232,0.2);white-space:nowrap;}
 .ticker-item b{color:var(--lime);font-weight:400;margin:0 12px;}
-
-/* SHARED */
 .section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .section-label::before{content:'';width:20px;height:1.5px;background:var(--lime);display:block;}
 .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,76px);line-height:1;letter-spacing:1.5px;margin-bottom:72px;}
-
-/* STATS */
 .stats{padding:80px 52px;background:var(--lime);display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
 .stat-item{background:var(--lime);padding:40px 32px;text-align:center;}
 .stat-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--black);line-height:1;}
 .stat-lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,0.6);font-weight:700;margin-top:4px;}
-
-/* SERVICES */
 .services{padding:130px 52px;}
 .svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
 .svc-card{background:var(--gray);padding:52px 44px;position:relative;overflow:hidden;transition:background 0.3s;}
@@ -98,8 +81,6 @@ nav ul a:hover{opacity:1;}
 .svc-icon{font-size:30px;margin-bottom:22px;display:block;}
 .svc-card h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;margin-bottom:14px;}
 .svc-card p{font-size:14.5px;color:rgba(244,240,232,0.48);line-height:1.75;font-weight:300;}
-
-/* HOW IT WORKS */
 .hiw{padding:130px 52px;background:var(--gray);}
 .hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
 .hiw-step{background:var(--black);padding:52px 40px;position:relative;overflow:hidden;}
@@ -107,8 +88,6 @@ nav ul a:hover{opacity:1;}
 .hiw-icon{font-size:36px;margin-bottom:24px;display:block;}
 .hiw-step h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;margin-bottom:14px;color:var(--lime);}
 .hiw-step p{font-size:14px;color:rgba(244,240,232,0.48);line-height:1.75;font-weight:300;}
-
-/* PORTFOLIO */
 .portfolio{padding:130px 52px;}
 .port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
 .port-card{background:var(--gray);aspect-ratio:4/3;position:relative;overflow:hidden;cursor:pointer;}
@@ -123,8 +102,6 @@ nav ul a:hover{opacity:1;}
 .port-overlay p{font-size:12px;color:rgba(0,0,0,0.6);font-weight:600;letter-spacing:1px;text-transform:uppercase;}
 .port-tag{position:absolute;top:14px;left:14px;background:var(--lime);color:var(--black);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:5px 10px;z-index:2;}
 .port-note{margin-top:20px;font-size:13px;color:rgba(244,240,232,0.3);font-weight:300;text-align:center;}
-
-/* TESTIMONIALS */
 .testimonials{padding:130px 52px;background:var(--gray);overflow:hidden;}
 .testi-outer{overflow:hidden;margin:0 -52px;padding:0 52px;}
 .testi-track{display:flex;gap:16px;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);}
@@ -142,8 +119,6 @@ nav ul a:hover{opacity:1;}
 .testi-dots{display:flex;gap:8px;margin-left:8px;}
 .testi-dot{width:5px;height:5px;border-radius:50%;background:rgba(244,240,232,0.15);cursor:pointer;transition:background 0.2s,width 0.2s;}
 .testi-dot.active{background:var(--lime);width:18px;border-radius:3px;}
-
-/* BOOKING */
 .booking{padding:130px 52px;background:var(--black);}
 .booking-inner{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
 .booking-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,5.5vw,72px);line-height:0.95;letter-spacing:1.5px;margin-bottom:20px;}
@@ -151,13 +126,9 @@ nav ul a:hover{opacity:1;}
 .booking-left p{font-size:15px;color:rgba(244,240,232,0.45);line-height:1.8;font-weight:300;margin-bottom:32px;}
 .booking-perks{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;}
 .booking-perks li{font-size:14px;color:rgba(244,240,232,0.65);display:flex;align-items:center;gap:12px;font-weight:500;}
-.booking-perks li::before{content:'✓';color:var(--lime);font-weight:800;}
-.booking-frame{background:var(--gray);border:1px solid var(--border);overflow:hidden;min-height:500px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
-.booking-frame iframe{width:100%;height:500px;border:none;}
-.booking-placeholder{text-align:center;padding:40px;}
-.booking-placeholder p{font-size:13px;color:var(--muted);line-height:1.7;}
-
-/* ABOUT */
+.booking-perks li::before{content:'checkmark';content:'\2713';color:var(--lime);font-weight:800;}
+.booking-right{background:var(--gray);border:1px solid var(--border);padding:52px 44px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center;}
+.booking-right p{font-size:15px;color:rgba(244,240,232,0.5);line-height:1.75;}
 .about{padding:130px 52px;display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
 .about-visual{position:relative;}
 .about-box{width:100%;aspect-ratio:4/5;background:linear-gradient(145deg,#181818,#222);display:flex;align-items:center;justify-content:center;}
@@ -167,9 +138,7 @@ nav ul a:hover{opacity:1;}
 .about p{font-size:15.5px;color:rgba(244,240,232,0.5);line-height:1.8;font-weight:300;margin-bottom:18px;}
 .about-bullets{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:12px;}
 .about-bullets li{font-size:14px;color:rgba(244,240,232,0.65);display:flex;align-items:center;gap:12px;font-weight:500;}
-.about-bullets li::before{content:'→';color:var(--lime);}
-
-/* PRICING */
+.about-bullets li::before{content:'\2192';color:var(--lime);}
 .pricing{padding:130px 52px;background:var(--gray);}
 .pricing-tabs{display:flex;gap:2px;margin-bottom:52px;width:fit-content;}
 .ptab{background:var(--black);border:none;color:rgba(244,240,232,0.45);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:14px 32px;cursor:pointer;transition:all 0.2s;}
@@ -187,7 +156,7 @@ nav ul a:hover{opacity:1;}
 .plan-features{list-style:none;flex:1;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;}
 .plan-features li{font-size:13.5px;display:flex;align-items:flex-start;gap:10px;opacity:0.78;line-height:1.5;}
 .plan-card.hot .plan-features li{color:var(--black);}
-.plan-features li::before{content:'✓';font-weight:800;flex-shrink:0;margin-top:1px;}
+.plan-features li::before{content:'\2713';font-weight:800;flex-shrink:0;margin-top:1px;}
 .plan-btn{display:block;text-align:center;text-decoration:none;padding:14px 20px;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;border:1.5px solid currentColor;transition:all 0.2s;}
 .plan-card:not(.hot) .plan-btn{color:var(--white);}
 .plan-card:not(.hot) .plan-btn:hover{background:var(--lime);border-color:var(--lime);color:var(--black);}
@@ -195,16 +164,12 @@ nav ul a:hover{opacity:1;}
 .plan-card.hot .plan-btn:hover{background:var(--black);color:var(--lime);}
 .pricing-note{margin-top:20px;font-size:12.5px;color:rgba(244,240,232,0.3);font-weight:300;}
 .pricing-note a{color:var(--lime);text-decoration:none;}
-
-/* ADD-ONS */
 .addons{padding:0 52px 130px;background:var(--gray);}
 .addons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:40px;}
 .addon{background:var(--black);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;border-left:2px solid var(--lime);transition:background 0.2s;}
 .addon:hover{background:#0e0e0e;}
 .addon-name{font-size:13.5px;font-weight:500;}
 .addon-price{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--lime);}
-
-/* FAQ */
 .faq{padding:130px 52px;}
 .faq-list{display:flex;flex-direction:column;gap:2px;}
 .faq-item{background:var(--gray);border-left:2px solid transparent;transition:border-color 0.3s;}
@@ -217,8 +182,6 @@ nav ul a:hover{opacity:1;}
 .faq-item.open .faq-a{max-height:400px;}
 .faq-a-inner{padding:0 36px 26px;}
 .faq-a-inner p{font-size:14.5px;color:rgba(244,240,232,0.5);line-height:1.8;font-weight:300;}
-
-/* PAYMENT */
 .payment{padding:130px 52px;background:var(--gray);}
 .pay-intro{font-size:15px;color:rgba(244,240,232,0.45);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:48px;}
 .pay-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
@@ -233,8 +196,6 @@ nav ul a:hover{opacity:1;}
 .pay-card:hover .pay-arrow{color:var(--lime);transform:translateX(4px);}
 .pay-note{margin-top:28px;font-size:13px;color:rgba(244,240,232,0.3);line-height:1.8;font-weight:300;}
 .pay-note strong{color:var(--lime);font-weight:600;}
-
-/* CONTACT */
 .contact{padding:130px 52px;display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start;}
 .contact-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,80px);line-height:0.95;letter-spacing:1.5px;margin-bottom:24px;}
 .contact-left h2 span{color:var(--lime);}
@@ -253,15 +214,11 @@ nav ul a:hover{opacity:1;}
 .form-submit{background:var(--lime);color:var(--black);border:none;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;padding:18px 40px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;align-self:flex-start;}
 .form-submit:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(200,255,0,0.3);}
 .form-success{display:none;background:rgba(200,255,0,0.07);border:1px solid rgba(200,255,0,0.25);padding:20px 24px;font-size:13.5px;color:var(--lime);line-height:1.6;margin-top:12px;}
-
-/* CTA BAND */
 .cta-band{padding:130px 52px;background:var(--gray);text-align:center;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;}
 .cta-band::before{content:'GROW';font-family:'Bebas Neue',sans-serif;font-size:280px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(244,240,232,0.02);letter-spacing:20px;pointer-events:none;white-space:nowrap;}
 .cta-band h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,100px);line-height:0.95;letter-spacing:2px;margin-bottom:24px;position:relative;z-index:1;}
 .cta-band h2 span{color:var(--lime);}
 .cta-band p{font-size:16px;color:rgba(244,240,232,0.4);max-width:380px;line-height:1.75;margin-bottom:44px;font-weight:300;position:relative;z-index:1;}
-
-/* FOOTER */
 footer{padding:40px 52px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);flex-wrap:wrap;gap:16px;}
 .footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;}
 .footer-logo span{color:var(--lime);}
@@ -269,14 +226,10 @@ footer p{font-size:12px;color:var(--muted);}
 .footer-links{display:flex;gap:24px;}
 .footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
 .footer-links a:hover{color:var(--lime);}
-
-/* ANIMATIONS */
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
 @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
 .reveal{opacity:0;transform:translateY(36px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-
-/* ADMIN */
 #adminOverlay{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.93);backdrop-filter:blur(12px);overflow-y:auto;}
 #adminOverlay.open{display:block;}
 .aw{max-width:960px;margin:0 auto;padding:48px 32px 80px;}
@@ -302,8 +255,6 @@ footer p{font-size:12px;color:var(--muted);}
 .a-save{background:var(--lime);color:var(--black);border:none;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;padding:16px 40px;cursor:pointer;transition:transform 0.2s;}
 .a-save:hover{transform:translateY(-2px);}
 .a-ok{display:none;color:var(--lime);font-size:13px;font-weight:600;padding:14px 20px;background:rgba(200,255,0,0.07);border:1px solid rgba(200,255,0,0.2);}
-
-/* LOGIN */
 #loginModal{display:none;position:fixed;inset:0;z-index:20000;background:rgba(0,0,0,0.96);backdrop-filter:blur(16px);align-items:center;justify-content:center;}
 #loginModal.open{display:flex;}
 .lb{background:#141414;border:1px solid rgba(200,255,0,0.15);padding:52px 44px;width:100%;max-width:400px;}
@@ -318,11 +269,8 @@ footer p{font-size:12px;color:var(--muted);}
 .l-cancel{background:transparent;border:none;color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:14px;display:block;width:100%;text-align:center;}
 .key-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(200,255,0,0.12);border:1px solid rgba(200,255,0,0.3);color:var(--lime);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:12px 24px;z-index:9000;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;}
 .key-toast.show{opacity:1;}
-
 @media(max-width:768px){
-  nav{padding:20px 24px;}
-  nav ul{display:none;}
-  .hamburger{display:flex;}
+  nav{padding:20px 24px;}nav ul{display:none;}.hamburger{display:flex;}
   .hero{padding:100px 24px 80px;}.hero-nums{display:none;}
   .services,.faq,.portfolio,.contact,.cta-band,.booking{padding-left:24px;padding-right:24px;}
   .hiw,.testimonials,.payment,.pricing,.addons,.about{padding-left:24px;padding-right:24px;}
@@ -333,107 +281,59 @@ footer p{font-size:12px;color:var(--muted);}
   .stats{grid-template-columns:repeat(2,1fr);}
   footer{padding:32px 24px;}
   .ag{grid-template-columns:1fr;}.aw{padding:28px 16px 60px;}
-  .float-cta{bottom:20px;right:16px;}
-  .sms-btn{bottom:20px;left:16px;padding:12px 16px;}
+  .float-cta{bottom:20px;right:16px;}.sms-btn{bottom:20px;left:16px;}
 }
 </style>
 </head>
 <body>
 
-<!-- LOADER -->
-<div id="loader">
-  <div class="loader-logo">JERMS<span>.</span></div>
-  <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
-  <div class="loader-txt">Loading...</div>
-</div>
-
+<div id="loader"><div class="loader-logo">JERMS<span>.</span></div><div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div><div class="loader-txt">Loading...</div></div>
 <div class="cursor" id="cursor"></div>
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="key-toast" id="keyToast">J pressed — now press M to open admin</div>
 
-<!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <button class="mobile-close" onclick="closeMobile()">X</button>
   <a href="#services" onclick="closeMobile()">Services</a>
   <a href="#hiw" onclick="closeMobile()">Process</a>
   <a href="#portfolio" onclick="closeMobile()">Work</a>
   <a href="#pricing" onclick="closeMobile()">Pricing</a>
   <a href="#booking" onclick="closeMobile()">Book a Call</a>
   <a href="#faq" onclick="closeMobile()">FAQ</a>
-  <a href="#contact" onclick="closeMobile()" style="color:var(--lime)">Let's Talk</a>
+  <a href="#contact" onclick="closeMobile()">Contact</a>
 </div>
 
-<!-- LOGIN MODAL -->
 <div id="loginModal">
   <div class="lb">
     <h2>Admin Login</h2>
-    <p>Jerms Media &mdash; Owner Access Only</p>
+    <p>Jerms Media — Owner Access Only</p>
     <div class="lf"><label>Username</label><input type="text" id="lu" placeholder="jeremiah" autocomplete="username"></div>
-    <div class="lf"><label>Password</label><input type="password" id="lp" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="lf"><label>Password</label><input type="password" id="lp" autocomplete="current-password"></div>
     <button class="l-btn" onclick="doLogin()">Sign In</button>
     <div class="l-err" id="lerr">Incorrect username or password.</div>
     <button class="l-cancel" onclick="closeLogin()">Cancel</button>
   </div>
 </div>
 
-<!-- ADMIN PANEL -->
 <div id="adminOverlay">
   <div class="aw">
-    <div class="ah">
-      <h1>⚡ Admin Panel</h1>
-      <div style="display:flex;gap:12px;align-items:center">
-        <span style="font-size:11px;color:var(--muted)">Logged in as Jeremiah</span>
-        <button class="a-close" onclick="closeAdmin()">Close &amp; Save</button>
-      </div>
-    </div>
-    <div class="as"><div class="ast">Hero</div>
-      <div class="ag">
-        <div class="af"><label>Eyebrow</label><input type="text" id="ae"></div>
-        <div class="af"><label>Line 1</label><input type="text" id="ah1"></div>
-        <div class="af"><label>Line 2 (outline)</label><input type="text" id="ah2"></div>
-        <div class="af"><label>Line 3 (green)</label><input type="text" id="ah3"></div>
-        <div class="af full"><label>Subheading</label><input type="text" id="asub"></div>
-      </div>
-    </div>
+    <div class="ah"><h1>Admin Panel</h1><div style="display:flex;gap:12px;align-items:center"><span style="font-size:11px;color:var(--muted)">Logged in as Jeremiah</span><button class="a-close" onclick="closeAdmin()">Close</button></div></div>
+    <div class="as"><div class="ast">Hero</div><div class="ag"><div class="af"><label>Eyebrow</label><input type="text" id="ae"></div><div class="af"><label>Line 1</label><input type="text" id="ah1"></div><div class="af"><label>Line 2 (outline)</label><input type="text" id="ah2"></div><div class="af"><label>Line 3 (green)</label><input type="text" id="ah3"></div><div class="af full"><label>Subheading</label><input type="text" id="asub"></div></div></div>
     <div class="as"><div class="ast">Services</div><div id="asl"></div><div class="a-row"><button class="a-add" onclick="addSvc()">+ Add Service</button></div></div>
-    <div class="as"><div class="ast">How It Works Steps</div><div id="ahiwl"></div><div class="a-row"><button class="a-add" onclick="addHiw()">+ Add Step</button></div></div>
-    <div class="as"><div class="ast">Portfolio Items</div><div id="apl"></div><div class="a-row"><button class="a-add" onclick="addPort()">+ Add Item</button></div></div>
+    <div class="as"><div class="ast">How It Works</div><div id="ahiwl"></div><div class="a-row"><button class="a-add" onclick="addHiw()">+ Add Step</button></div></div>
+    <div class="as"><div class="ast">Portfolio</div><div id="apl"></div><div class="a-row"><button class="a-add" onclick="addPort()">+ Add Item</button></div></div>
     <div class="as"><div class="ast">Testimonials</div><div id="atl"></div><div class="a-row"><button class="a-add" onclick="addTesti()">+ Add Review</button></div></div>
     <div class="as"><div class="ast">Monthly Plans</div><div id="aml"></div><div class="a-row"><button class="a-add" onclick="addPlan('monthly')">+ Add Plan</button></div></div>
     <div class="as"><div class="ast">One-Time Projects</div><div id="aol"></div><div class="a-row"><button class="a-add" onclick="addPlan('onetime')">+ Add Project</button></div></div>
     <div class="as"><div class="ast">Add-Ons</div><div id="aal"></div><div class="a-row"><button class="a-add" onclick="addAddon()">+ Add Add-On</button></div></div>
     <div class="as"><div class="ast">FAQ</div><div id="afql"></div><div class="a-row"><button class="a-add" onclick="addFaq()">+ Add Question</button></div></div>
-    <div class="as"><div class="ast">About</div>
-      <div class="ag">
-        <div class="af full"><label>Heading</label><input type="text" id="aabh"></div>
-        <div class="af full"><label>Paragraph 1</label><textarea id="aab1" rows="3"></textarea></div>
-        <div class="af full"><label>Paragraph 2</label><textarea id="aab2" rows="3"></textarea></div>
-      </div>
-    </div>
-    <div class="as"><div class="ast">Contact &amp; Payment</div>
-      <div class="ag">
-        <div class="af"><label>Email</label><input type="text" id="ace"></div>
-        <div class="af"><label>Phone</label><input type="text" id="acp"></div>
-        <div class="af"><label>Cash App URL</label><input type="text" id="aca"></div>
-        <div class="af"><label>Cash App Handle</label><input type="text" id="acah"></div>
-        <div class="af"><label>Venmo URL</label><input type="text" id="acv"></div>
-        <div class="af"><label>Venmo Handle</label><input type="text" id="acvh"></div>
-      </div>
-    </div>
-    <div class="as"><div class="ast">Change Admin Password</div>
-      <div class="ag">
-        <div class="af"><label>New Password</label><input type="password" id="anp" placeholder="Leave blank to keep current"></div>
-        <div class="af"><label>Confirm</label><input type="password" id="anp2" placeholder="Repeat new password"></div>
-      </div>
-    </div>
-    <div class="a-row">
-      <button class="a-save" onclick="saveAll()">💾 Save All Changes</button>
-      <div class="a-ok" id="aok">✓ Saved and live!</div>
-    </div>
+    <div class="as"><div class="ast">About</div><div class="ag"><div class="af full"><label>Heading</label><input type="text" id="aabh"></div><div class="af full"><label>Paragraph 1</label><textarea id="aab1" rows="3"></textarea></div><div class="af full"><label>Paragraph 2</label><textarea id="aab2" rows="3"></textarea></div></div></div>
+    <div class="as"><div class="ast">Contact and Payment</div><div class="ag"><div class="af"><label>Email</label><input type="text" id="ace"></div><div class="af"><label>Phone</label><input type="text" id="acp"></div><div class="af"><label>Cash App URL</label><input type="text" id="aca"></div><div class="af"><label>Cash App Handle</label><input type="text" id="acah"></div><div class="af"><label>Venmo URL</label><input type="text" id="acv"></div><div class="af"><label>Venmo Handle</label><input type="text" id="acvh"></div></div></div>
+    <div class="as"><div class="ast">Change Password</div><div class="ag"><div class="af"><label>New Password</label><input type="password" id="anp" placeholder="Leave blank to keep current"></div><div class="af"><label>Confirm</label><input type="password" id="anp2"></div></div></div>
+    <div class="a-row"><button class="a-save" onclick="saveAll()">Save All Changes</button><div class="a-ok" id="aok">Saved!</div></div>
   </div>
 </div>
 
-<!-- NAV -->
 <nav id="nav">
   <a class="logo-mark" href="#">JERMS<span>.</span></a>
   <ul>
@@ -443,72 +343,60 @@ footer p{font-size:12px;color:var(--muted);}
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#booking">Book a Call</a></li>
     <li><a href="#faq">FAQ</a></li>
-    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
-  <div class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></div>
+  <button class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></button>
 </nav>
 
-<!-- FLOATING BUTTONS -->
-<a href="#contact" class="float-cta" id="floatCta"><div class="float-dot"></div>Book a Free Call</a>
-<a href="sms:3478820487" class="sms-btn" id="smsBtn"><span class="sms-icon">💬</span>Text Me</a>
+<a href="#booking" class="float-cta" id="floatCta"><div class="float-dot"></div>Book a Free Call</a>
+<a href="sms:3478820487" class="sms-btn" id="smsBtn">💬 Text Me</a>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-eyebrow" id="se">Berlin, NJ · Est. 2024</div>
-  <h1 class="hero-title">
-    <span id="sh1">YOUR BRAND.</span><br>
-    <span class="stroke" id="sh2">BUILT</span><br>
-    <span class="lime" id="sh3">DIFFERENT.</span>
-  </h1>
+  <h1 class="hero-title"><span id="sh1">YOUR BRAND.</span><br><span class="stroke" id="sh2">BUILT</span><br><span class="lime" id="sh3">DIFFERENT.</span></h1>
   <p class="hero-sub" id="ssub">Social media, viral video, logos and websites — for local businesses ready to actually grow online.</p>
   <div class="hero-btns">
     <a href="#booking" class="btn-lime">Book a Free Call</a>
     <a href="#services" class="btn-ghost">See What I Do →</a>
   </div>
   <div class="hero-nums">
-    <div class="hnum"><div class="hnum-val">4</div><div class="hnum-lbl">Services</div></div>
-    <div class="hnum"><div class="hnum-val">10</div><div class="hnum-lbl">Min Call</div></div>
+    <div class="hnum"><div class="hnum-val">16</div><div class="hnum-lbl">Years Old</div></div>
     <div class="hnum"><div class="hnum-val">100%</div><div class="hnum-lbl">Local Focus</div></div>
+    <div class="hnum"><div class="hnum-val">10</div><div class="hnum-lbl">Min Free Call</div></div>
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker"><div class="ticker-track">
-  <span class="ticker-item">Social Media<b>✦</b></span><span class="ticker-item">Short Form Video<b>✦</b></span><span class="ticker-item">Logo Design<b>✦</b></span><span class="ticker-item">Website Creation<b>✦</b></span><span class="ticker-item">Reels &amp; TikToks<b>✦</b></span><span class="ticker-item">Brand Identity<b>✦</b></span><span class="ticker-item">Local Business Growth<b>✦</b></span><span class="ticker-item">Social Media<b>✦</b></span><span class="ticker-item">Short Form Video<b>✦</b></span><span class="ticker-item">Logo Design<b>✦</b></span><span class="ticker-item">Website Creation<b>✦</b></span><span class="ticker-item">Reels &amp; TikToks<b>✦</b></span><span class="ticker-item">Brand Identity<b>✦</b></span><span class="ticker-item">Local Business Growth<b>✦</b></span>
+  <span class="ticker-item">Social Media<b>✦</b></span><span class="ticker-item">Short Form Video<b>✦</b></span><span class="ticker-item">Logo Design<b>✦</b></span><span class="ticker-item">Website Creation<b>✦</b></span><span class="ticker-item">Email Marketing<b>✦</b></span><span class="ticker-item">Brand Identity<b>✦</b></span><span class="ticker-item">Local Business Growth<b>✦</b></span><span class="ticker-item">Social Media<b>✦</b></span><span class="ticker-item">Short Form Video<b>✦</b></span><span class="ticker-item">Logo Design<b>✦</b></span><span class="ticker-item">Website Creation<b>✦</b></span><span class="ticker-item">Email Marketing<b>✦</b></span><span class="ticker-item">Brand Identity<b>✦</b></span><span class="ticker-item">Local Business Growth<b>✦</b></span>
 </div></div>
 
-<!-- STATS -->
-<section class="stats reveal">
+<section class="stats">
   <div class="stat-item"><div class="stat-num" data-target="16">0</div><div class="stat-lbl">Years Old</div></div>
   <div class="stat-item"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Months Running</div></div>
   <div class="stat-item"><div class="stat-num" data-target="100">0</div><div class="stat-lbl">% Local Focus</div></div>
   <div class="stat-item"><div class="stat-num" data-target="10">0</div><div class="stat-lbl">Min Free Call</div></div>
 </section>
 
-<!-- SERVICES -->
 <section class="services" id="services">
   <div class="section-label">What I Do</div>
   <h2 class="section-title reveal">Services Built<br>For Real Results.</h2>
   <div class="svc-grid" id="ss"></div>
 </section>
 
-<!-- HOW IT WORKS -->
 <section class="hiw" id="hiw">
   <div class="section-label">The Process</div>
   <h2 class="section-title reveal">Simple As<br>1, 2, 3.</h2>
   <div class="hiw-grid" id="shiw"></div>
 </section>
 
-<!-- PORTFOLIO -->
 <section class="portfolio" id="portfolio">
   <div class="section-label">My Work</div>
   <h2 class="section-title reveal">Results That<br>Speak Loud.</h2>
   <div class="port-grid" id="sport"></div>
-  <p class="port-note reveal">More work coming soon — follow along on Instagram &amp; TikTok.</p>
+  <p class="port-note reveal">More work coming soon — follow along on Instagram and TikTok.</p>
 </section>
 
-<!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
   <div class="section-label">Reviews</div>
   <h2 class="section-title reveal">What Clients<br>Are Saying.</h2>
@@ -520,13 +408,12 @@ footer p{font-size:12px;color:var(--muted);}
   </div>
 </section>
 
-<!-- BOOKING -->
 <section class="booking" id="booking">
   <div class="booking-inner">
     <div class="booking-left reveal">
       <div class="section-label">Free Consultation</div>
       <h2>BOOK YOUR<br><span>FREE CALL.</span></h2>
-      <p>Pick a time that works for you. 10 minutes, zero pressure. We'll talk about your business and figure out exactly what you need.</p>
+      <p>Pick a time that works for you. 10 minutes, zero pressure. We will talk about your business and figure out exactly what you need.</p>
       <ul class="booking-perks">
         <li>100% free, no commitment</li>
         <li>Takes less than 10 minutes</li>
@@ -534,20 +421,17 @@ footer p{font-size:12px;color:var(--muted);}
         <li>Book instantly, no back-and-forth</li>
       </ul>
     </div>
-    <div class="booking-frame reveal">
-      <iframe src="https://calendly.com/jermsmedia/30min" frameborder="0" scrolling="yes" title="Book a call with Jerms Media"></iframe>
+    <div class="booking-right reveal">
+      <p>Click below to pick a time that works for you. Takes 30 seconds.</p>
+      <a href="https://calendly.com/jermsmedia/30min" target="_blank" class="btn-lime">Pick a Time →</a>
     </div>
   </div>
 </section>
 
-<!-- ABOUT -->
 <section class="about" id="about">
-  <div class="about-visual reveal">
-    <div class="about-box"></div>
-    <div class="about-badge">BERLIN, NJ<br>BASED</div>
-  </div>
+  <div class="about-visual reveal"><div class="about-box"></div><div class="about-badge">BERLIN, NJ<br>BASED</div></div>
   <div>
-    <div class="section-label">Who's Behind It</div>
+    <div class="section-label">Who is Behind It</div>
     <h2 class="reveal" id="sabh"></h2>
     <p class="reveal" id="sab1"></p>
     <p class="reveal" id="sab2"></p>
@@ -560,7 +444,6 @@ footer p{font-size:12px;color:var(--muted);}
   </div>
 </section>
 
-<!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="section-label">Investment</div>
   <h2 class="section-title reveal">Simple Pricing.<br>No Surprises.</h2>
@@ -568,17 +451,10 @@ footer p{font-size:12px;color:var(--muted);}
     <button class="ptab active" onclick="switchTab('monthly')">Monthly Plans</button>
     <button class="ptab" onclick="switchTab('onetime')">One-Time Projects</button>
   </div>
-  <div class="pricing-panel active" id="panel-monthly">
-    <div class="plan-grid" id="sm"></div>
-    <p class="pricing-note">Billed at the start of each month. Cancel anytime with 7 days notice. <a href="#contact">Questions? Ask →</a></p>
-  </div>
-  <div class="pricing-panel" id="panel-onetime">
-    <div class="plan-grid" id="so"></div>
-    <p class="pricing-note">50% deposit to start, remainder on delivery. <a href="#contact">Custom project? Let's talk →</a></p>
-  </div>
+  <div class="pricing-panel active" id="panel-monthly"><div class="plan-grid" id="sm"></div><p class="pricing-note">Billed at the start of each month. Cancel anytime with 7 days notice. <a href="#contact">Questions? Ask</a></p></div>
+  <div class="pricing-panel" id="panel-onetime"><div class="plan-grid" id="so"></div><p class="pricing-note">50% deposit to start, remainder on delivery. <a href="#contact">Custom project? Talk to me</a></p></div>
 </section>
 
-<!-- ADD-ONS -->
 <section class="addons">
   <div class="section-label">Add-Ons</div>
   <h2 class="section-title reveal" style="margin-bottom:8px">Need Something Extra?</h2>
@@ -586,34 +462,31 @@ footer p{font-size:12px;color:var(--muted);}
   <div class="addons-grid" id="sa"></div>
 </section>
 
-<!-- FAQ -->
 <section class="faq" id="faq">
   <div class="section-label">FAQ</div>
   <h2 class="section-title reveal">Got Questions?<br>I Got Answers.</h2>
   <div class="faq-list reveal" id="sfaq"></div>
 </section>
 
-<!-- PAYMENT -->
 <section class="payment" id="pay">
   <div class="section-label">How to Pay</div>
   <h2 class="section-title reveal">Easy Payment.<br>No Hassle.</h2>
   <p class="pay-intro reveal">Once we agree on a project, tap below to pay. Takes 30 seconds. Always include your business name in the note!</p>
   <div class="pay-methods reveal">
-    <a id="pca" href="https://cash.app/$Itsjerms2" target="_blank" rel="noopener" class="pay-card">
+    <a id="pca" href="https://cash.app/$Itsjerms2" target="_blank" class="pay-card">
       <div class="pay-icon">💚</div>
       <div class="pay-info"><span class="pay-platform">Cash App</span><span class="pay-handle" id="pcah">$Itsjerms2</span></div>
       <span class="pay-arrow">→</span>
     </a>
-    <a id="pvm" href="https://venmo.com/u/Charles-Mortise" target="_blank" rel="noopener" class="pay-card">
+    <a id="pvm" href="https://venmo.com/u/Charles-Mortise" target="_blank" class="pay-card">
       <div class="pay-icon">💙</div>
       <div class="pay-info"><span class="pay-platform">Venmo</span><span class="pay-handle" id="pvmh">@Charles-Mortise</span></div>
       <span class="pay-arrow">→</span>
     </a>
   </div>
-  <p class="pay-note reveal"><strong>Monthly clients:</strong> Payment due the 1st of each month. | <strong>Project clients:</strong> 50% upfront, 50% on delivery. Include your business name in the note!</p>
+  <p class="pay-note reveal"><strong>Monthly clients:</strong> Payment due the 1st of each month. | <strong>Project clients:</strong> 50% upfront, 50% on delivery.</p>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
   <div class="contact-left">
     <div class="section-label">Get In Touch</div>
@@ -630,36 +503,37 @@ footer p{font-size:12px;color:var(--muted);}
     <form class="contact-form" id="contactForm">
       <div class="form-row">
         <div class="form-group"><label>Your Name</label><input type="text" id="fn" placeholder="Jane Smith" required></div>
-        <div class="form-group"><label>Business Name</label><input type="text" id="fb" placeholder="Smith's Salon" required></div>
+        <div class="form-group"><label>Business Name</label><input type="text" id="fb" placeholder="Smith Salon" required></div>
       </div>
       <div class="form-group"><label>Email</label><input type="email" id="fe" placeholder="jane@yourbiz.com" required></div>
-      <div class="form-group">
-        <label>Interested In?</label>
+      <div class="form-group"><label>Interested In?</label>
         <select id="fs">
           <option value="">Select a service...</option>
-          <option>Starter Plan - $149/mo</option><option>Growth Plan - $279/mo</option><option>Full Package - $449/mo</option>
-          <option>Logo Design - $75</option><option>Website Build - $199</option><option>Brand Starter Kit - $249</option>
-          <option>Not sure - let's talk</option>
+          <option>Starter Plan - $149/mo</option>
+          <option>Growth Plan - $279/mo</option>
+          <option>Full Package - $449/mo</option>
+          <option>Logo Design - $75</option>
+          <option>Website Build - $199</option>
+          <option>Brand Starter Kit - $249</option>
+          <option>Not sure - lets talk</option>
         </select>
       </div>
       <div class="form-group"><label>Anything Else?</label><textarea id="fm" placeholder="Tell me about your business..."></textarea></div>
       <button type="submit" class="form-submit">Send Message →</button>
-      <div class="form-success" id="fsuc">✓ Opening your email app! Reach me at jermsmedia@gmail.com or (347) 882-0487.</div>
+      <div class="form-success" id="fsuc">Opening your email app! Reach me at jermsmedia@gmail.com or (347) 882-0487.</div>
     </form>
   </div>
 </section>
 
-<!-- CTA BAND -->
 <section class="cta-band">
   <h2 class="reveal">READY TO<br><span>STAND OUT?</span></h2>
-  <p class="reveal">Most local businesses are invisible online. Let's make sure yours isn't.</p>
+  <p class="reveal">Most local businesses are invisible online. Let's make sure yours is not.</p>
   <a href="#booking" class="btn-lime reveal">Book Your Free Call →</a>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-logo">JERMS<span>.</span></div>
-  <p>© 2024 Jerms Media · Berlin, NJ</p>
+  <p>2024 Jerms Media · Berlin, NJ</p>
   <div class="footer-links">
     <a href="https://cash.app/$Itsjerms2" target="_blank">Cash App</a>
     <a href="https://venmo.com/u/Charles-Mortise" target="_blank">Venmo</a>
@@ -669,7 +543,6 @@ footer p{font-size:12px;color:var(--muted);}
 </footer>
 
 <script>
-/* LOADER */
 var fill=document.getElementById('loaderFill'),pct=0;
 var lt=setInterval(function(){
   pct+=Math.random()*18;
@@ -677,27 +550,25 @@ var lt=setInterval(function(){
   fill.style.width=pct+'%';
 },120);
 
-/* MOBILE MENU */
 function openMobile(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
 function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
 
-/* DEFAULT DATA */
 var DEF={
   creds:{u:'jeremiah',p:'jerms2024'},
-  hero:{e:'Berlin, NJ · Est. 2024',h1:'YOUR BRAND.',h2:'BUILT',h3:'DIFFERENT.',sub:'Social media, viral video, logos and websites — for local businesses ready to actually grow online.'},
+  hero:{e:'Berlin, NJ - Est. 2024',h1:'YOUR BRAND.',h2:'BUILT',h3:'DIFFERENT.',sub:'Social media, viral video, logos and websites for local businesses ready to actually grow online.'},
   about:{h:"I'm Jeremiah.<br>I Make Local<br>Brands Pop.",p1:'At 16, I started Jerms Media because I saw local businesses getting left behind online. I knew I could fix that.',p2:'You talk directly to me — no agency, no middleman. Fast, affordable, and built for small businesses.'},
   con:{email:'jermsmedia@gmail.com',phone:'(347) 882-0487',ca:'https://cash.app/$Itsjerms2',vm:'https://venmo.com/u/Charles-Mortise',cah:'$Itsjerms2',vmh:'@Charles-Mortise'},
   svcs:[
-    {i:'📱',t:'Social Media Management',d:'Consistent posting, content planning, and community management so your pages stay active and growing — without you lifting a finger.'},
-    {i:'🎬',t:'Short Form Video & Content filming',d:'Scroll-stopping Reels and TikToks filmed with a professional camera, edited and posted for you. I come to your location and handle everything.'},
-    {i:'✏️',t:'Logo Design',d:"A sharp, professional logo that makes your brand look like it means business. First impressions matter — let's make yours count."},
-    {i:'💻',t:'Website Creation',d:"Clean, fast, mobile-ready websites that convert visitors into customers. No fluff — just a site that works as hard as you do."},
-    {i:'📧',t:'Email Marketing',d:"Stay in front of your customers with professional email campaigns. Newsletters, promos, and follow-ups that actually get opened and drive sales."}
+    {i:'📱',t:'Social Media Management',d:'Consistent posting, content planning, and community management so your pages stay active and growing without you lifting a finger.'},
+    {i:'🎬',t:'Short Form Video and Content Filming',d:'Scroll-stopping Reels and TikToks filmed with a professional camera, edited and posted for you. I come to your location and handle everything.'},
+    {i:'✏️',t:'Logo Design',d:'A sharp, professional logo that makes your brand look like it means business. First impressions matter.'},
+    {i:'💻',t:'Website Creation',d:'Clean, fast, mobile-ready websites that convert visitors into customers. No fluff, just a site that works as hard as you do.'},
+    {i:'📧',t:'Email Marketing',d:'Stay in front of your customers with professional email campaigns. Newsletters, promos, and follow-ups that actually get opened and drive sales.'}
   ],
   hiw:[
-    {i:'📞',t:'Book a Free Call',d:"We jump on a quick 10-minute call. You tell me about your business and what you need. Zero pressure, zero commitment."},
-    {i:'🎯',t:'We Make a Plan',d:"I put together a simple, custom plan for your business. We agree on what to do, the price, and the timeline. Easy."},
-    {i:'🚀',t:'You Grow',d:"I get to work. You sit back and watch your online presence grow while you focus on running your business."}
+    {i:'📞',t:'Book a Free Call',d:'We jump on a quick 10-minute call. You tell me about your business and what you need. Zero pressure, zero commitment.'},
+    {i:'🎯',t:'We Make a Plan',d:'I put together a simple, custom plan for your business. We agree on what to do, the price, and the timeline. Easy.'},
+    {i:'🚀',t:'You Grow',d:'I get to work. You sit back and watch your online presence grow while you focus on running your business.'}
   ],
   port:[
     {tag:'Social Media',t:'Sample Instagram Page',d:'Consistent content, branded graphics',ph:'📱'},
@@ -708,30 +579,30 @@ var DEF={
     {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐'}
   ],
   testis:[
-    {stars:5,text:"Just getting started — but I'm hungry, local, and ready to put in the work for your business. Book a free call and let's talk.",name:'Jeremiah',biz:'Jerms Media · Berlin, NJ'},
+    {stars:5,text:'Just getting started but I am hungry, local, and ready to put in the work for your business. Book a free call and lets talk.',name:'Jeremiah',biz:'Jerms Media - Berlin, NJ'}
   ],
   monthly:[
-    {b:'Starter',p:'$149',c:'/ month',hot:false,f:['Social media management','3 posts per week','Basic graphics & captions','1 platform (IG or FB)','Monthly performance recap']},
-    {b:'⭐ Most Popular',p:'$279',c:'/ month',hot:true,f:['Social media management','5 posts per week','4 Reels or TikToks filmed & edited','2 platforms covered','Custom graphics included','Email newsletter (2x/month)','Priority response time']},
-    {b:'Full Package',p:'$449',c:'/ month',hot:false,f:['Everything in Growth','8 Reels or TikToks filmed & edited','All platforms managed','Website maintenance','Email marketing (4x/month)','Full brand content strategy','Weekly check-in calls']}
+    {b:'Starter',p:'$149',c:'/ month',hot:false,f:['Social media management','3 posts per week','Basic graphics and captions','1 platform (IG or FB)','Monthly performance recap']},
+    {b:'Most Popular',p:'$279',c:'/ month',hot:true,f:['Social media management','5 posts per week','4 Reels or TikToks filmed and edited','2 platforms covered','Custom graphics included','Email newsletter 2x per month','Priority response time']},
+    {b:'Full Package',p:'$449',c:'/ month',hot:false,f:['Everything in Growth','8 Reels or TikToks filmed and edited','All platforms managed','Website maintenance','Email marketing 4x per month','Logo design included','Full brand content strategy','Weekly check-in calls']}
   ],
   onetime:[
-    {b:'Logo Design',p:'$75',c:'one-time',hot:false,f:['2 initial concepts','2 rounds of revisions','Final files PNG + SVG','Delivered in 3–5 days']},
-    {b:'⭐ Website Build',p:'$199',c:'one-time',hot:true,f:['Custom designed website','Mobile responsive','Contact form included','Free hosting setup help','Delivered in 5–7 days']},
-    {b:'Brand Starter Kit',p:'$249',c:'one-time',hot:false,f:['Logo design','Custom website','Color palette & fonts','Social profile setup','Best value bundle']}
+    {b:'Logo Design',p:'$75',c:'one-time',hot:false,f:['2 initial concepts','2 rounds of revisions','Final files PNG and SVG','Delivered in 3-5 days']},
+    {b:'Website Build',p:'$199',c:'one-time',hot:true,f:['Custom designed website','Mobile responsive','Contact form included','Free hosting setup help','Delivered in 5-7 days']},
+    {b:'Brand Starter Kit',p:'$249',c:'one-time',hot:false,f:['Logo design','Custom website','Color palette and fonts','Social profile setup','Best value bundle']}
   ],
   addons:[
-    {n:'Extra Reel / TikTok',p:'$25'},{n:'Extra Logo Revision',p:'$20'},
+    {n:'Extra Reel or TikTok',p:'$25'},{n:'Extra Logo Revision',p:'$20'},
     {n:'Additional Web Page',p:'$50'},{n:'Local Content Shoot',p:'$60'},
-    {n:'Rush Delivery (48hr)',p:'+$40'},{n:'Social Media Audit',p:'$35'}
+    {n:'Rush Delivery 48hr',p:'+$40'},{n:'Social Media Audit',p:'$35'}
   ],
   faq:[
-    {q:'Do I need to sign a contract?',a:'No long-term contracts. Monthly clients can cancel with 7 days notice. For one-time projects, we just agree on the scope and price upfront — simple as that.'},
-    {q:'How fast will I see results?',a:'Most clients see increased engagement within the first 2–3 weeks. Real growth in followers and leads usually kicks in around the 1–2 month mark as content builds momentum.'},
+    {q:'Do I need to sign a contract?',a:'No long-term contracts. Monthly clients can cancel with 7 days notice. For one-time projects, we just agree on the scope and price upfront.'},
+    {q:'How fast will I see results?',a:'Most clients see increased engagement within the first 2-3 weeks. Real growth in followers and leads usually kicks in around the 1-2 month mark.'},
     {q:'Do you work with businesses outside Berlin, NJ?',a:'Absolutely. Most of my work is done remotely, so I can work with businesses anywhere in South Jersey and beyond.'},
-    {q:'What do you need from me to get started?',a:'Just your business info, logo (if you have one), and access to your social accounts. I handle everything else from there.'},
-    {q:"Can I see examples of your work first?",a:"Yes — check out the portfolio section above. I'm also happy to share more examples on our free call."},
-    {q:'How do I pay?',a:'Cash App or Venmo. Super easy. For monthly plans, payment is due on the 1st. For projects, I take 50% upfront and 50% when the work is done.'}
+    {q:'What do you need from me to get started?',a:'Just your business info, logo if you have one, and access to your social accounts. I handle everything else from there.'},
+    {q:'Can I see examples of your work first?',a:'Yes, check out the portfolio section above. I am also happy to share more examples on our free call.'},
+    {q:'How do I pay?',a:'Cash App or Venmo. For monthly plans, payment is due on the 1st. For projects, I take 50% upfront and 50% when the work is done.'}
   ]
 };
 
@@ -779,14 +650,6 @@ function render(){
 
 function ph(p){return '<div class="plan-card'+(p.hot?' hot':'')+' reveal"><div class="plan-badge">'+esc(p.b)+'</div><div class="plan-price">'+esc(p.p)+'</div><div class="plan-cycle">'+esc(p.c)+'</div><ul class="plan-features">'+p.f.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul><a href="#booking" class="plan-btn">Get Started</a></div>';}
 
-/* STATS COUNTER */
-function animateStats(){
-  document.querySelectorAll('.stat-num').forEach(function(el){
-    var target=parseInt(el.getAttribute('data-target')),cur=0,inc=Math.ceil(target/40);
-    var t=setInterval(function(){cur+=inc;if(cur>=target){cur=target;clearInterval(t);}el.textContent=cur+(target===100?'%':'+');},40);
-  });
-}
-
 var testiIdx=0;
 function testiGo(i){var cards=document.querySelectorAll('.testi-card');var dots=document.querySelectorAll('.testi-dot');if(!cards.length)return;testiIdx=Math.max(0,Math.min(i,cards.length-1));var track=document.getElementById('stesti');var w=cards[0].offsetWidth+16;track.style.transform='translateX(-'+(testiIdx*w)+'px)';cards.forEach(function(c,j){c.classList.toggle('active',j===testiIdx);});dots.forEach(function(d,j){d.classList.toggle('active',j===testiIdx);});}
 function testiNext(){var cards=document.querySelectorAll('.testi-card');testiGo((testiIdx+1)%cards.length);}
@@ -794,13 +657,13 @@ function testiPrev(){var cards=document.querySelectorAll('.testi-card');testiGo(
 function toggleFaq(i){var el=document.getElementById('faq-'+i);var wasOpen=el.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open');});if(!wasOpen)el.classList.add('open');}
 function switchTab(t){document.querySelectorAll('.ptab').forEach(function(x,i){x.classList.toggle('active',(i===0&&t==='monthly')||(i===1&&t==='onetime'));});document.getElementById('panel-monthly').classList.toggle('active',t==='monthly');document.getElementById('panel-onetime').classList.toggle('active',t==='onetime');}
 
-/* SECRET ADMIN */
 var jPressed=false,jTimer=null;
 document.addEventListener('keydown',function(e){
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
   if(e.key.toLowerCase()==='j'){jPressed=true;clearTimeout(jTimer);document.getElementById('keyToast').classList.add('show');jTimer=setTimeout(function(){jPressed=false;document.getElementById('keyToast').classList.remove('show');},2000);}
   else if(e.key.toLowerCase()==='m'&&jPressed){jPressed=false;clearTimeout(jTimer);document.getElementById('keyToast').classList.remove('show');openLogin();}
 });
+
 function openLogin(){document.getElementById('loginModal').classList.add('open');setTimeout(function(){document.getElementById('lu').focus();},80);}
 function closeLogin(){document.getElementById('loginModal').classList.remove('open');document.getElementById('lerr').style.display='none';}
 function doLogin(){var u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value;if(u===D.creds.u&&p===D.creds.p){closeLogin();popAdmin();document.getElementById('adminOverlay').classList.add('open');document.body.style.overflow='hidden';}else{document.getElementById('lerr').style.display='block';}}
@@ -809,13 +672,13 @@ document.getElementById('lp').addEventListener('keydown',function(e){if(e.key===
 document.getElementById('lu').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 
 function popAdmin(){var h=D.hero,c=D.con;document.getElementById('ae').value=h.e;document.getElementById('ah1').value=h.h1;document.getElementById('ah2').value=h.h2;document.getElementById('ah3').value=h.h3;document.getElementById('asub').value=h.sub;document.getElementById('aabh').value=D.about.h;document.getElementById('aab1').value=D.about.p1;document.getElementById('aab2').value=D.about.p2;document.getElementById('ace').value=c.email;document.getElementById('acp').value=c.phone;document.getElementById('aca').value=c.ca;document.getElementById('acah').value=c.cah;document.getElementById('acv').value=c.vm;document.getElementById('acvh').value=c.vmh;rAS();rAHiw();rAPort();rATesti();rAP('monthly');rAP('onetime');rAA();rAFaq();}
-function rAS(){document.getElementById('asl').innerHTML=D.svcs.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Service '+(i+1)+'</span><button class="a-del" onclick="dI(\'svcs\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.svcs['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.svcs['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.svcs['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
-function rAHiw(){document.getElementById('ahiwl').innerHTML=D.hiw.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Step '+(i+1)+'</span><button class="a-del" onclick="dI(\'hiw\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.hiw['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.hiw['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.hiw['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
-function rAPort(){document.getElementById('apl').innerHTML=D.port.map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Item '+(i+1)+'</span><button class="a-del" onclick="dI(\'port\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Tag</label><input type="text" value="'+esc(p.tag)+'" onchange="D.port['+i+'].tag=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(p.t)+'" onchange="D.port['+i+'].t=this.value"></div><div class="af"><label>Description</label><input type="text" value="'+esc(p.d)+'" onchange="D.port['+i+'].d=this.value"></div><div class="af"><label>Icon/Emoji</label><input type="text" value="'+esc(p.ph)+'" onchange="D.port['+i+'].ph=this.value"></div></div></div>';}).join('');}
-function rATesti(){document.getElementById('atl').innerHTML=D.testis.map(function(t,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Review '+(i+1)+'</span><button class="a-del" onclick="dI(\'testis\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(t.name)+'" onchange="D.testis['+i+'].name=this.value"></div><div class="af"><label>Business</label><input type="text" value="'+esc(t.biz)+'" onchange="D.testis['+i+'].biz=this.value"></div><div class="af full"><label>Review Text</label><textarea rows="3" onchange="D.testis['+i+'].text=this.value">'+esc(t.text)+'</textarea></div></div></div>';}).join('');}
-function rAP(k){var el=k==='monthly'?'aml':'aol';document.getElementById(el).innerHTML=D[k].map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">'+esc(p.b||'Plan '+(i+1))+'</span><button class="a-del" onclick="dI(\''+k+'\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Badge</label><input type="text" value="'+esc(p.b)+'" onchange="D[\''+k+'\']['+i+'].b=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(p.p)+'" onchange="D[\''+k+'\']['+i+'].p=this.value"></div><div class="af"><label>Cycle</label><input type="text" value="'+esc(p.c)+'" onchange="D[\''+k+'\']['+i+'].c=this.value"></div><div class="af"><label>Featured (green)?</label><select onchange="D[\''+k+'\']['+i+'].hot=this.value===\'true\'"><option value="false"'+(p.hot?'':' selected')+'>No</option><option value="true"'+(p.hot?' selected':'')+'>Yes</option></select></div><div class="af full"><label>Features (one per line)</label><textarea rows="5" onchange="D[\''+k+'\']['+i+'].f=this.value.split(\'\\n\').filter(Boolean)">'+esc(p.f.join('\n'))+'</textarea></div></div></div>';}).join('');}
-function rAA(){document.getElementById('aal').innerHTML=D.addons.map(function(a,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Add-On '+(i+1)+'</span><button class="a-del" onclick="dI(\'addons\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(a.n)+'" onchange="D.addons['+i+'].n=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(a.p)+'" onchange="D.addons['+i+'].p=this.value"></div></div></div>';}).join('');}
-function rAFaq(){document.getElementById('afql').innerHTML=D.faq.map(function(f,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Q '+(i+1)+'</span><button class="a-del" onclick="dI(\'faq\','+i+')">✕</button></div><div class="ag"><div class="af full"><label>Question</label><input type="text" value="'+esc(f.q)+'" onchange="D.faq['+i+'].q=this.value"></div><div class="af full"><label>Answer</label><textarea rows="3" onchange="D.faq['+i+'].a=this.value">'+esc(f.a)+'</textarea></div></div></div>';}).join('');}
+function rAS(){document.getElementById('asl').innerHTML=D.svcs.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Service '+(i+1)+'</span><button class="a-del" onclick="dI(\'svcs\','+i+')">X</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.svcs['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.svcs['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.svcs['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
+function rAHiw(){document.getElementById('ahiwl').innerHTML=D.hiw.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Step '+(i+1)+'</span><button class="a-del" onclick="dI(\'hiw\','+i+')">X</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.hiw['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.hiw['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.hiw['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
+function rAPort(){document.getElementById('apl').innerHTML=D.port.map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Item '+(i+1)+'</span><button class="a-del" onclick="dI(\'port\','+i+')">X</button></div><div class="ag"><div class="af"><label>Tag</label><input type="text" value="'+esc(p.tag)+'" onchange="D.port['+i+'].tag=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(p.t)+'" onchange="D.port['+i+'].t=this.value"></div><div class="af"><label>Description</label><input type="text" value="'+esc(p.d)+'" onchange="D.port['+i+'].d=this.value"></div><div class="af"><label>Emoji</label><input type="text" value="'+esc(p.ph)+'" onchange="D.port['+i+'].ph=this.value"></div></div></div>';}).join('');}
+function rATesti(){document.getElementById('atl').innerHTML=D.testis.map(function(t,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Review '+(i+1)+'</span><button class="a-del" onclick="dI(\'testis\','+i+')">X</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(t.name)+'" onchange="D.testis['+i+'].name=this.value"></div><div class="af"><label>Business</label><input type="text" value="'+esc(t.biz)+'" onchange="D.testis['+i+'].biz=this.value"></div><div class="af full"><label>Review Text</label><textarea rows="3" onchange="D.testis['+i+'].text=this.value">'+esc(t.text)+'</textarea></div></div></div>';}).join('');}
+function rAP(k){var el=k==='monthly'?'aml':'aol';document.getElementById(el).innerHTML=D[k].map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">'+esc(p.b||'Plan '+(i+1))+'</span><button class="a-del" onclick="dI(\''+k+'\','+i+')">X</button></div><div class="ag"><div class="af"><label>Badge</label><input type="text" value="'+esc(p.b)+'" onchange="D[\''+k+'\']['+i+'].b=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(p.p)+'" onchange="D[\''+k+'\']['+i+'].p=this.value"></div><div class="af"><label>Cycle</label><input type="text" value="'+esc(p.c)+'" onchange="D[\''+k+'\']['+i+'].c=this.value"></div><div class="af"><label>Featured green?</label><select onchange="D[\''+k+'\']['+i+'].hot=this.value===\'true\'"><option value="false"'+(p.hot?'':' selected')+'>No</option><option value="true"'+(p.hot?' selected':'')+'>Yes</option></select></div><div class="af full"><label>Features one per line</label><textarea rows="5" onchange="D[\''+k+'\']['+i+'].f=this.value.split(\'\\n\').filter(Boolean)">'+esc(p.f.join('\n'))+'</textarea></div></div></div>';}).join('');}
+function rAA(){document.getElementById('aal').innerHTML=D.addons.map(function(a,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Add-On '+(i+1)+'</span><button class="a-del" onclick="dI(\'addons\','+i+')">X</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(a.n)+'" onchange="D.addons['+i+'].n=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(a.p)+'" onchange="D.addons['+i+'].p=this.value"></div></div></div>';}).join('');}
+function rAFaq(){document.getElementById('afql').innerHTML=D.faq.map(function(f,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Q '+(i+1)+'</span><button class="a-del" onclick="dI(\'faq\','+i+')">X</button></div><div class="ag"><div class="af full"><label>Question</label><input type="text" value="'+esc(f.q)+'" onchange="D.faq['+i+'].q=this.value"></div><div class="af full"><label>Answer</label><textarea rows="3" onchange="D.faq['+i+'].a=this.value">'+esc(f.a)+'</textarea></div></div></div>';}).join('');}
 function addSvc(){D.svcs.push({i:'⭐',t:'New Service',d:'Describe this service.'});rAS();}
 function addHiw(){D.hiw.push({i:'🔥',t:'New Step',d:'Describe this step.'});rAHiw();}
 function addPort(){D.port.push({tag:'New',t:'New Item',d:'Description',ph:'📸'});rAPort();}
@@ -826,13 +689,11 @@ function addFaq(){D.faq.push({q:'New question?',a:'Answer here.'});rAFaq();}
 function dI(k,i){D[k].splice(i,1);if(k==='svcs')rAS();else if(k==='hiw')rAHiw();else if(k==='port')rAPort();else if(k==='testis')rATesti();else if(k==='addons')rAA();else if(k==='faq')rAFaq();else rAP(k);}
 function saveAll(){D.hero={e:document.getElementById('ae').value,h1:document.getElementById('ah1').value,h2:document.getElementById('ah2').value,h3:document.getElementById('ah3').value,sub:document.getElementById('asub').value};D.about={h:document.getElementById('aabh').value,p1:document.getElementById('aab1').value,p2:document.getElementById('aab2').value};D.con={email:document.getElementById('ace').value,phone:document.getElementById('acp').value,ca:document.getElementById('aca').value,vm:document.getElementById('acv').value,cah:document.getElementById('acah').value,vmh:document.getElementById('acvh').value};var np=document.getElementById('anp').value,np2=document.getElementById('anp2').value;if(np&&np===np2)D.creds.p=np;['creds','hero','about','con','svcs','hiw','port','testis','monthly','onetime','addons','faq'].forEach(function(k){sl(k,D[k]);});render();var m=document.getElementById('aok');m.style.display='block';setTimeout(function(){m.style.display='none';},3000);}
 
-/* CURSOR */
 var cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing'),mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=(mx-5)+'px';cur.style.top=(my-5)+'px';});
 (function ar(){rx+=(mx-rx-17)*0.12;ry+=(my-ry-17)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
 document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){cur.style.transform='scale(2.5)';ring.style.transform='scale(1.4)';});el.addEventListener('mouseleave',function(){cur.style.transform='scale(1)';ring.style.transform='scale(1)';});});
 
-/* SCROLL */
 var statsAnimated=false;
 window.addEventListener('scroll',function(){
   document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
@@ -841,16 +702,22 @@ window.addEventListener('scroll',function(){
   if(!statsAnimated){var s=document.querySelector('.stats');if(s&&s.getBoundingClientRect().top<window.innerHeight){statsAnimated=true;animateStats();}}
 });
 
+function animateStats(){
+  document.querySelectorAll('.stat-num').forEach(function(el){
+    var target=parseInt(el.getAttribute('data-target')),cur2=0,inc=Math.ceil(target/40);
+    var t=setInterval(function(){cur2+=inc;if(cur2>=target){cur2=target;clearInterval(t);}el.textContent=cur2+(target===100?'%':'+');},40);
+  });
+}
+
 function reObs(){
   var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*70);});},{threshold:0.08});
   document.querySelectorAll('.reveal').forEach(function(el){el.classList.remove('visible');obs.observe(el);});
 }
 
-/* CONTACT FORM */
 document.getElementById('contactForm').addEventListener('submit',function(e){
   e.preventDefault();
   var n=document.getElementById('fn').value,b=document.getElementById('fb').value,em=document.getElementById('fe').value,sv=document.getElementById('fs').value,msg=document.getElementById('fm').value;
-  var sub=encodeURIComponent('New Inquiry — '+b);
+  var sub=encodeURIComponent('New Inquiry - '+b);
   var body=encodeURIComponent('Name: '+n+'\nBusiness: '+b+'\nEmail: '+em+'\nService: '+sv+'\n\nMessage:\n'+msg);
   window.location.href='mailto:'+D.con.email+'?subject='+sub+'&body='+body;
   document.getElementById('fsuc').style.display='block';
