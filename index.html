@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jerms Media — Social Media & Web Services · Berlin, NJ</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--black:#080808;--white:#f4f0e8;--lime:#c8ff00;--gray:#141414;--gray2:#1e1e1e;--muted:#555;--border:rgba(244,240,232,0.07);}
+html{scroll-behavior:smooth;}
+body{background:var(--black);color:var(--white);font-family:'DM Sans',sans-serif;overflow-x:hidden;cursor:none;}
+.cursor{width:10px;height:10px;background:var(--lime);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transition:transform 0.15s ease;mix-blend-mode:difference;}
+.cursor-ring{width:34px;height:34px;border:1.5px solid rgba(200,255,0,0.5);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;}
+
+/* LOADER */
+#loader{position:fixed;inset:0;background:var(--black);z-index:99999;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:opacity 0.6s ease,visibility 0.6s ease;}
+#loader.hide{opacity:0;visibility:hidden;}
+.loader-logo{font-family:'Bebas Neue',sans-serif;font-size:64px;letter-spacing:8px;color:var(--white);animation:loaderPulse 1.2s ease-in-out infinite;}
+.loader-logo span{color:var(--lime);}
+.loader-bar{width:200px;height:2px;background:rgba(244,240,232,0.1);margin-top:32px;overflow:hidden;}
+.loader-fill{height:100%;background:var(--lime);width:0%;transition:width 0.05s linear;}
+.loader-txt{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:16px;}
+@keyframes loaderPulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:22px 52px;transition:background 0.4s;}
+nav.scrolled{background:rgba(8,8,8,0.97);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.logo-mark{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:4px;text-decoration:none;color:var(--white);}
+.logo-mark span{color:var(--lime);}
+nav ul{list-style:none;display:flex;gap:28px;align-items:center;}
+nav ul a{color:var(--white);text-decoration:none;font-size:11px;font-weight:500;letter-spacing:1.8px;text-transform:uppercase;opacity:0.6;transition:opacity 0.2s;}
+nav ul a:hover{opacity:1;}
+.nav-cta{background:var(--lime)!important;color:var(--black)!important;opacity:1!important;padding:10px 24px;font-weight:700!important;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
+.hamburger span{width:24px;height:2px;background:var(--white);transition:all 0.3s;}
+.mobile-menu{display:none;position:fixed;inset:0;background:rgba(8,8,8,0.98);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--white);text-decoration:none;font-family:'Bebas Neue',sans-serif;font-size:42px;letter-spacing:4px;opacity:0.7;transition:opacity 0.2s,color 0.2s;}
+.mobile-menu a:hover{opacity:1;color:var(--lime);}
+.mobile-close{position:absolute;top:28px;right:28px;background:transparent;border:none;color:var(--white);font-size:28px;cursor:pointer;}
+
+/* FLOATING BUTTONS */
+.float-cta{position:fixed;bottom:32px;right:32px;z-index:400;background:var(--lime);color:var(--black);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 28px;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(200,255,0,0.35);transition:transform 0.2s,box-shadow 0.2s,opacity 0.3s;opacity:0;pointer-events:none;}
+.float-cta.show{opacity:1;pointer-events:all;}
+.float-cta:hover{transform:translateY(-3px);box-shadow:0 16px 48px rgba(200,255,0,0.4);}
+.float-dot{width:7px;height:7px;background:var(--black);border-radius:50%;animation:pdot 1.5s ease-in-out infinite;}
+@keyframes pdot{0%,100%{transform:scale(1);}50%{transform:scale(1.5);opacity:0.5;}}
+.sms-btn{position:fixed;bottom:32px;left:32px;z-index:400;background:var(--gray);color:var(--white);text-decoration:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:14px 22px;display:flex;align-items:center;gap:10px;border:1px solid rgba(244,240,232,0.12);box-shadow:0 8px 32px rgba(0,0,0,0.4);transition:transform 0.2s,border-color 0.2s,opacity 0.3s;opacity:0;pointer-events:none;}
+.sms-btn.show{opacity:1;pointer-events:all;}
+.sms-btn:hover{transform:translateY(-3px);border-color:var(--lime);color:var(--lime);}
+.sms-icon{font-size:16px;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:130px 52px 100px;position:relative;overflow:hidden;}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 85% 45%,rgba(200,255,0,0.07) 0%,transparent 65%);pointer-events:none;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s 0.1s forwards;}
+.hero-eyebrow::before{content:'';width:28px;height:1.5px;background:var(--lime);display:block;}
+.hero-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(68px,11.5vw,155px);line-height:0.88;max-width:950px;opacity:0;animation:fadeUp 0.9s 0.3s forwards;}
+.hero-title .stroke{-webkit-text-stroke:2px rgba(244,240,232,0.85);color:transparent;}
+.hero-title .lime{color:var(--lime);}
+.hero-sub{margin-top:36px;font-size:17px;color:rgba(244,240,232,0.5);max-width:440px;line-height:1.75;font-weight:300;opacity:0;animation:fadeUp 0.9s 0.5s forwards;}
+.hero-btns{margin-top:44px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;opacity:0;animation:fadeUp 0.9s 0.7s forwards;}
+.btn-lime{background:var(--lime);color:var(--black);text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;padding:16px 38px;display:inline-block;transition:transform 0.2s,box-shadow 0.2s;}
+.btn-lime:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(200,255,0,0.3);}
+.btn-ghost{color:var(--white);text-decoration:none;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;font-weight:500;opacity:0.55;display:flex;align-items:center;gap:8px;transition:opacity 0.2s,gap 0.25s;}
+.btn-ghost:hover{opacity:1;gap:14px;}
+.hero-nums{position:absolute;bottom:36px;right:52px;display:flex;gap:44px;opacity:0;animation:fadeUp 0.9s 0.9s forwards;}
+.hnum{text-align:right;}
+.hnum-val{font-family:'Bebas Neue',sans-serif;font-size:44px;color:var(--lime);line-height:1;}
+.hnum-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+
+/* TICKER */
+.ticker{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:18px 0;background:var(--gray);}
+.ticker-track{display:flex;width:max-content;animation:ticker 22s linear infinite;}
+.ticker-item{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;padding:0 36px;color:rgba(244,240,232,0.2);white-space:nowrap;}
+.ticker-item b{color:var(--lime);font-weight:400;margin:0 12px;}
+
+/* SHARED */
+.section-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--lime);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-label::before{content:'';width:20px;height:1.5px;background:var(--lime);display:block;}
+.section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,76px);line-height:1;letter-spacing:1.5px;margin-bottom:72px;}
+
+/* STATS */
+.stats{padding:80px 52px;background:var(--lime);display:grid;grid-template-columns:repeat(4,1fr);gap:2px;}
+.stat-item{background:var(--lime);padding:40px 32px;text-align:center;}
+.stat-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:var(--black);line-height:1;}
+.stat-lbl{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,0.6);font-weight:700;margin-top:4px;}
+
+/* SERVICES */
+.services{padding:130px 52px;}
+.svc-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;}
+.svc-card{background:var(--gray);padding:52px 44px;position:relative;overflow:hidden;transition:background 0.3s;}
+.svc-card:hover{background:#1c1c1c;}
+.svc-card::after{content:'';position:absolute;bottom:0;left:0;height:2px;width:0;background:var(--lime);transition:width 0.45s ease;}
+.svc-card:hover::after{width:100%;}
+.svc-bg-num{font-family:'Bebas Neue',sans-serif;font-size:72px;color:rgba(244,240,232,0.04);position:absolute;top:20px;right:32px;line-height:1;pointer-events:none;}
+.svc-icon{font-size:30px;margin-bottom:22px;display:block;}
+.svc-card h3{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:2px;margin-bottom:14px;}
+.svc-card p{font-size:14.5px;color:rgba(244,240,232,0.48);line-height:1.75;font-weight:300;}
+
+/* HOW IT WORKS */
+.hiw{padding:130px 52px;background:var(--gray);}
+.hiw-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.hiw-step{background:var(--black);padding:52px 40px;position:relative;overflow:hidden;}
+.hiw-num{font-family:'Bebas Neue',sans-serif;font-size:110px;color:rgba(200,255,0,0.05);position:absolute;top:8px;right:20px;line-height:1;pointer-events:none;}
+.hiw-icon{font-size:36px;margin-bottom:24px;display:block;}
+.hiw-step h3{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;margin-bottom:14px;color:var(--lime);}
+.hiw-step p{font-size:14px;color:rgba(244,240,232,0.48);line-height:1.75;font-weight:300;}
+
+/* PORTFOLIO */
+.portfolio{padding:130px 52px;}
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.port-card{background:var(--gray);aspect-ratio:4/3;position:relative;overflow:hidden;cursor:pointer;}
+.port-thumb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transition:transform 0.4s ease;}
+.port-card:hover .port-thumb{transform:scale(1.05);}
+.port-ph{text-align:center;padding:24px;}
+.port-ph-icon{font-size:40px;opacity:0.2;display:block;margin-bottom:10px;}
+.port-ph-txt{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(244,240,232,0.2);}
+.port-overlay{position:absolute;inset:0;background:rgba(200,255,0,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s;padding:24px;text-align:center;}
+.port-card:hover .port-overlay{opacity:1;}
+.port-overlay h4{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--black);margin-bottom:8px;}
+.port-overlay p{font-size:12px;color:rgba(0,0,0,0.6);font-weight:600;letter-spacing:1px;text-transform:uppercase;}
+.port-tag{position:absolute;top:14px;left:14px;background:var(--lime);color:var(--black);font-size:9px;letter-spacing:2px;text-transform:uppercase;font-weight:700;padding:5px 10px;z-index:2;}
+.port-note{margin-top:20px;font-size:13px;color:rgba(244,240,232,0.3);font-weight:300;text-align:center;}
+
+/* TESTIMONIALS */
+.testimonials{padding:130px 52px;background:var(--gray);overflow:hidden;}
+.testi-outer{overflow:hidden;margin:0 -52px;padding:0 52px;}
+.testi-track{display:flex;gap:16px;transition:transform 0.5s cubic-bezier(0.4,0,0.2,1);}
+.testi-card{background:var(--black);padding:40px 36px;min-width:360px;max-width:360px;flex-shrink:0;border:1px solid var(--border);transition:border-color 0.3s;}
+.testi-card.active{border-color:rgba(200,255,0,0.3);}
+.testi-stars{color:var(--lime);font-size:15px;margin-bottom:18px;letter-spacing:3px;}
+.testi-text{font-size:15px;color:rgba(244,240,232,0.6);line-height:1.8;font-weight:300;margin-bottom:28px;font-style:italic;}
+.testi-author{display:flex;align-items:center;gap:14px;}
+.testi-av{width:42px;height:42px;border-radius:50%;background:var(--gray2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--lime);flex-shrink:0;border:1px solid rgba(200,255,0,0.2);}
+.testi-name{font-weight:600;font-size:14px;margin-bottom:2px;}
+.testi-biz{font-size:12px;color:var(--muted);}
+.testi-controls{display:flex;gap:12px;margin-top:40px;align-items:center;}
+.testi-btn{background:transparent;border:1px solid rgba(244,240,232,0.12);color:var(--white);width:42px;height:42px;cursor:pointer;font-size:16px;transition:all 0.2s;display:flex;align-items:center;justify-content:center;}
+.testi-btn:hover{border-color:var(--lime);color:var(--lime);}
+.testi-dots{display:flex;gap:8px;margin-left:8px;}
+.testi-dot{width:5px;height:5px;border-radius:50%;background:rgba(244,240,232,0.15);cursor:pointer;transition:background 0.2s,width 0.2s;}
+.testi-dot.active{background:var(--lime);width:18px;border-radius:3px;}
+
+/* BOOKING */
+.booking{padding:130px 52px;background:var(--black);}
+.booking-inner{display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
+.booking-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,5.5vw,72px);line-height:0.95;letter-spacing:1.5px;margin-bottom:20px;}
+.booking-left h2 span{color:var(--lime);}
+.booking-left p{font-size:15px;color:rgba(244,240,232,0.45);line-height:1.8;font-weight:300;margin-bottom:32px;}
+.booking-perks{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;}
+.booking-perks li{font-size:14px;color:rgba(244,240,232,0.65);display:flex;align-items:center;gap:12px;font-weight:500;}
+.booking-perks li::before{content:'✓';color:var(--lime);font-weight:800;}
+.booking-frame{background:var(--gray);border:1px solid var(--border);overflow:hidden;min-height:500px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;}
+.booking-frame iframe{width:100%;height:500px;border:none;}
+.booking-placeholder{text-align:center;padding:40px;}
+.booking-placeholder p{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* ABOUT */
+.about{padding:130px 52px;display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:center;}
+.about-visual{position:relative;}
+.about-box{width:100%;aspect-ratio:4/5;background:linear-gradient(145deg,#181818,#222);display:flex;align-items:center;justify-content:center;}
+.about-box::before{content:'J';font-family:'Bebas Neue',sans-serif;font-size:240px;color:rgba(200,255,0,0.06);line-height:1;}
+.about-badge{position:absolute;bottom:-16px;right:-16px;background:var(--lime);color:var(--black);padding:18px 24px;font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:2px;line-height:1.3;}
+.about h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,5vw,62px);line-height:1;letter-spacing:1.5px;margin-bottom:28px;}
+.about p{font-size:15.5px;color:rgba(244,240,232,0.5);line-height:1.8;font-weight:300;margin-bottom:18px;}
+.about-bullets{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:12px;}
+.about-bullets li{font-size:14px;color:rgba(244,240,232,0.65);display:flex;align-items:center;gap:12px;font-weight:500;}
+.about-bullets li::before{content:'→';color:var(--lime);}
+
+/* PRICING */
+.pricing{padding:130px 52px;background:var(--gray);}
+.pricing-tabs{display:flex;gap:2px;margin-bottom:52px;width:fit-content;}
+.ptab{background:var(--black);border:none;color:rgba(244,240,232,0.45);font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:14px 32px;cursor:pointer;transition:all 0.2s;}
+.ptab.active{background:var(--lime);color:var(--black);}
+.pricing-panel{display:none;}
+.pricing-panel.active{display:block;}
+.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;}
+.plan-card{background:var(--black);padding:48px 36px 40px;display:flex;flex-direction:column;transition:transform 0.3s;}
+.plan-card:hover{transform:translateY(-6px);}
+.plan-card.hot{background:var(--lime);}
+.plan-badge{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;opacity:0.5;margin-bottom:20px;}
+.plan-price{font-family:'Bebas Neue',sans-serif;font-size:68px;line-height:1;margin-bottom:4px;}
+.plan-card.hot .plan-price,.plan-card.hot .plan-badge,.plan-card.hot .plan-cycle{color:var(--black);}
+.plan-cycle{font-size:12px;opacity:0.45;margin-bottom:32px;font-weight:500;}
+.plan-features{list-style:none;flex:1;display:flex;flex-direction:column;gap:12px;margin-bottom:36px;}
+.plan-features li{font-size:13.5px;display:flex;align-items:flex-start;gap:10px;opacity:0.78;line-height:1.5;}
+.plan-card.hot .plan-features li{color:var(--black);}
+.plan-features li::before{content:'✓';font-weight:800;flex-shrink:0;margin-top:1px;}
+.plan-btn{display:block;text-align:center;text-decoration:none;padding:14px 20px;font-size:12px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;border:1.5px solid currentColor;transition:all 0.2s;}
+.plan-card:not(.hot) .plan-btn{color:var(--white);}
+.plan-card:not(.hot) .plan-btn:hover{background:var(--lime);border-color:var(--lime);color:var(--black);}
+.plan-card.hot .plan-btn{color:var(--black);border-color:var(--black);}
+.plan-card.hot .plan-btn:hover{background:var(--black);color:var(--lime);}
+.pricing-note{margin-top:20px;font-size:12.5px;color:rgba(244,240,232,0.3);font-weight:300;}
+.pricing-note a{color:var(--lime);text-decoration:none;}
+
+/* ADD-ONS */
+.addons{padding:0 52px 130px;background:var(--gray);}
+.addons-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2px;margin-top:40px;}
+.addon{background:var(--black);padding:24px 28px;display:flex;justify-content:space-between;align-items:center;border-left:2px solid var(--lime);transition:background 0.2s;}
+.addon:hover{background:#0e0e0e;}
+.addon-name{font-size:13.5px;font-weight:500;}
+.addon-price{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--lime);}
+
+/* FAQ */
+.faq{padding:130px 52px;}
+.faq-list{display:flex;flex-direction:column;gap:2px;}
+.faq-item{background:var(--gray);border-left:2px solid transparent;transition:border-color 0.3s;}
+.faq-item.open{border-color:var(--lime);}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:26px 36px;cursor:pointer;gap:20px;user-select:none;}
+.faq-q h3{font-size:15.5px;font-weight:600;line-height:1.4;}
+.faq-icon{width:30px;height:30px;border:1px solid rgba(244,240,232,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px;transition:all 0.3s;color:var(--lime);line-height:1;}
+.faq-item.open .faq-icon{background:var(--lime);color:var(--black);border-color:var(--lime);transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height 0.4s ease;}
+.faq-item.open .faq-a{max-height:400px;}
+.faq-a-inner{padding:0 36px 26px;}
+.faq-a-inner p{font-size:14.5px;color:rgba(244,240,232,0.5);line-height:1.8;font-weight:300;}
+
+/* PAYMENT */
+.payment{padding:130px 52px;background:var(--gray);}
+.pay-intro{font-size:15px;color:rgba(244,240,232,0.45);max-width:520px;line-height:1.75;font-weight:300;margin-bottom:48px;}
+.pay-methods{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;}
+.pay-card{background:var(--black);padding:32px;display:flex;align-items:center;gap:20px;border:1px solid var(--border);text-decoration:none;transition:border-color 0.2s,transform 0.2s;}
+.pay-card:hover{border-color:var(--lime);transform:translateY(-3px);}
+.pay-icon{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;background:rgba(255,255,255,0.04);}
+.pay-info{display:flex;flex-direction:column;gap:4px;}
+.pay-platform{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);font-weight:600;}
+.pay-handle{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--white);}
+.pay-card:hover .pay-handle{color:var(--lime);}
+.pay-arrow{margin-left:auto;color:var(--muted);transition:color 0.2s,transform 0.2s;}
+.pay-card:hover .pay-arrow{color:var(--lime);transform:translateX(4px);}
+.pay-note{margin-top:28px;font-size:13px;color:rgba(244,240,232,0.3);line-height:1.8;font-weight:300;}
+.pay-note strong{color:var(--lime);font-weight:600;}
+
+/* CONTACT */
+.contact{padding:130px 52px;display:grid;grid-template-columns:1fr 1fr;gap:88px;align-items:start;}
+.contact-left h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,6vw,80px);line-height:0.95;letter-spacing:1.5px;margin-bottom:24px;}
+.contact-left h2 span{color:var(--lime);}
+.contact-left p{font-size:15px;color:rgba(244,240,232,0.45);line-height:1.8;font-weight:300;margin-bottom:36px;}
+.contact-info{display:flex;flex-direction:column;gap:16px;}
+.contact-info a{display:flex;align-items:center;gap:14px;text-decoration:none;color:var(--white);font-size:14px;font-weight:500;opacity:0.6;transition:opacity 0.2s,color 0.2s;}
+.contact-info a:hover{opacity:1;color:var(--lime);}
+.contact-form{display:flex;flex-direction:column;gap:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group{display:flex;flex-direction:column;gap:8px;}
+.form-group label{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:rgba(244,240,232,0.4);font-weight:600;}
+.form-group input,.form-group select,.form-group textarea{background:var(--gray);border:1px solid var(--border);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color 0.2s;resize:none;-webkit-appearance:none;}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--lime);}
+.form-group select option{background:var(--gray2);}
+.form-group textarea{min-height:110px;}
+.form-submit{background:var(--lime);color:var(--black);border:none;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;padding:18px 40px;cursor:pointer;transition:transform 0.2s,box-shadow 0.2s;align-self:flex-start;}
+.form-submit:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(200,255,0,0.3);}
+.form-success{display:none;background:rgba(200,255,0,0.07);border:1px solid rgba(200,255,0,0.25);padding:20px 24px;font-size:13.5px;color:var(--lime);line-height:1.6;margin-top:12px;}
+
+/* CTA BAND */
+.cta-band{padding:130px 52px;background:var(--gray);text-align:center;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;}
+.cta-band::before{content:'GROW';font-family:'Bebas Neue',sans-serif;font-size:280px;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:rgba(244,240,232,0.02);letter-spacing:20px;pointer-events:none;white-space:nowrap;}
+.cta-band h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,8vw,100px);line-height:0.95;letter-spacing:2px;margin-bottom:24px;position:relative;z-index:1;}
+.cta-band h2 span{color:var(--lime);}
+.cta-band p{font-size:16px;color:rgba(244,240,232,0.4);max-width:380px;line-height:1.75;margin-bottom:44px;font-weight:300;position:relative;z-index:1;}
+
+/* FOOTER */
+footer{padding:40px 52px;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--border);flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:4px;}
+.footer-logo span{color:var(--lime);}
+footer p{font-size:12px;color:var(--muted);}
+.footer-links{display:flex;gap:24px;}
+.footer-links a{font-size:12px;color:var(--muted);text-decoration:none;transition:color 0.2s;}
+.footer-links a:hover{color:var(--lime);}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px);}to{opacity:1;transform:translateY(0);}}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+
+/* ADMIN */
+#adminOverlay{display:none;position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.93);backdrop-filter:blur(12px);overflow-y:auto;}
+#adminOverlay.open{display:block;}
+.aw{max-width:960px;margin:0 auto;padding:48px 32px 80px;}
+.ah{display:flex;justify-content:space-between;align-items:center;margin-bottom:48px;border-bottom:1px solid var(--border);padding-bottom:24px;}
+.ah h1{font-family:'Bebas Neue',sans-serif;font-size:38px;letter-spacing:3px;color:var(--lime);}
+.a-close{background:transparent;border:1px solid rgba(244,240,232,0.2);color:var(--white);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;padding:10px 24px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.a-close:hover{border-color:var(--lime);color:var(--lime);}
+.as{margin-bottom:44px;}
+.ast{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--lime);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.ag{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+.af{display:flex;flex-direction:column;gap:6px;}
+.af.full{grid-column:1/-1;}
+.af label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(244,240,232,0.4);font-weight:600;}
+.af input,.af textarea,.af select{background:#1a1a1a;border:1px solid rgba(244,240,232,0.1);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color 0.2s;resize:vertical;-webkit-appearance:none;}
+.af input:focus,.af textarea:focus{border-color:var(--lime);}
+.ac{background:#1a1a1a;border:1px solid rgba(244,240,232,0.06);padding:22px;margin-bottom:10px;}
+.ac-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.ac-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:rgba(244,240,232,0.4);}
+.a-del{background:transparent;border:none;color:#ff5555;font-size:16px;cursor:pointer;padding:4px 8px;}
+.a-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;align-items:center;}
+.a-add{background:transparent;border:1px solid rgba(200,255,0,0.3);color:var(--lime);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;padding:10px 22px;cursor:pointer;transition:all 0.2s;}
+.a-add:hover{background:rgba(200,255,0,0.08);}
+.a-save{background:var(--lime);color:var(--black);border:none;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;padding:16px 40px;cursor:pointer;transition:transform 0.2s;}
+.a-save:hover{transform:translateY(-2px);}
+.a-ok{display:none;color:var(--lime);font-size:13px;font-weight:600;padding:14px 20px;background:rgba(200,255,0,0.07);border:1px solid rgba(200,255,0,0.2);}
+
+/* LOGIN */
+#loginModal{display:none;position:fixed;inset:0;z-index:20000;background:rgba(0,0,0,0.96);backdrop-filter:blur(16px);align-items:center;justify-content:center;}
+#loginModal.open{display:flex;}
+.lb{background:#141414;border:1px solid rgba(200,255,0,0.15);padding:52px 44px;width:100%;max-width:400px;}
+.lb h2{font-family:'Bebas Neue',sans-serif;font-size:34px;letter-spacing:3px;color:var(--lime);margin-bottom:6px;}
+.lb p{font-size:13px;color:var(--muted);margin-bottom:30px;}
+.lf{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;}
+.lf label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(244,240,232,0.4);font-weight:600;}
+.lf input{background:#1a1a1a;border:1px solid rgba(244,240,232,0.1);color:var(--white);font-family:'DM Sans',sans-serif;font-size:14px;padding:14px 18px;outline:none;transition:border-color 0.2s;}
+.lf input:focus{border-color:var(--lime);}
+.l-btn{width:100%;background:var(--lime);color:var(--black);border:none;font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:1.8px;text-transform:uppercase;font-weight:700;padding:16px;cursor:pointer;margin-top:8px;}
+.l-err{display:none;color:#ff6b6b;font-size:13px;margin-top:10px;padding:10px 14px;background:rgba(255,100,100,0.08);border:1px solid rgba(255,100,100,0.2);}
+.l-cancel{background:transparent;border:none;color:var(--muted);font-size:11px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:14px;display:block;width:100%;text-align:center;}
+.key-toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(200,255,0,0.12);border:1px solid rgba(200,255,0,0.3);color:var(--lime);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:12px 24px;z-index:9000;opacity:0;transition:opacity 0.3s;pointer-events:none;white-space:nowrap;}
+.key-toast.show{opacity:1;}
+
+@media(max-width:768px){
+  nav{padding:20px 24px;}
+  nav ul{display:none;}
+  .hamburger{display:flex;}
+  .hero{padding:100px 24px 80px;}.hero-nums{display:none;}
+  .services,.faq,.portfolio,.contact,.cta-band,.booking{padding-left:24px;padding-right:24px;}
+  .hiw,.testimonials,.payment,.pricing,.addons,.about{padding-left:24px;padding-right:24px;}
+  .svc-grid,.plan-grid,.hiw-grid,.port-grid{grid-template-columns:1fr;}
+  .about{grid-template-columns:1fr;gap:40px;}.about-visual{display:none;}
+  .contact{grid-template-columns:1fr;gap:48px;}.form-row{grid-template-columns:1fr;}
+  .booking-inner{grid-template-columns:1fr;gap:40px;}
+  .stats{grid-template-columns:repeat(2,1fr);}
+  footer{padding:32px 24px;}
+  .ag{grid-template-columns:1fr;}.aw{padding:28px 16px 60px;}
+  .float-cta{bottom:20px;right:16px;}
+  .sms-btn{bottom:20px;left:16px;padding:12px 16px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">JERMS<span>.</span></div>
+  <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+  <div class="loader-txt">Loading...</div>
+</div>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="key-toast" id="keyToast">J pressed — now press M to open admin</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#hiw" onclick="closeMobile()">Process</a>
+  <a href="#portfolio" onclick="closeMobile()">Work</a>
+  <a href="#pricing" onclick="closeMobile()">Pricing</a>
+  <a href="#booking" onclick="closeMobile()">Book a Call</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
+  <a href="#contact" onclick="closeMobile()" style="color:var(--lime)">Let's Talk</a>
+</div>
+
+<!-- LOGIN MODAL -->
+<div id="loginModal">
+  <div class="lb">
+    <h2>Admin Login</h2>
+    <p>Jerms Media &mdash; Owner Access Only</p>
+    <div class="lf"><label>Username</label><input type="text" id="lu" placeholder="jeremiah" autocomplete="username"></div>
+    <div class="lf"><label>Password</label><input type="password" id="lp" placeholder="••••••••" autocomplete="current-password"></div>
+    <button class="l-btn" onclick="doLogin()">Sign In</button>
+    <div class="l-err" id="lerr">Incorrect username or password.</div>
+    <button class="l-cancel" onclick="closeLogin()">Cancel</button>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminOverlay">
+  <div class="aw">
+    <div class="ah">
+      <h1>⚡ Admin Panel</h1>
+      <div style="display:flex;gap:12px;align-items:center">
+        <span style="font-size:11px;color:var(--muted)">Logged in as Jeremiah</span>
+        <button class="a-close" onclick="closeAdmin()">Close &amp; Save</button>
+      </div>
+    </div>
+    <div class="as"><div class="ast">Hero</div>
+      <div class="ag">
+        <div class="af"><label>Eyebrow</label><input type="text" id="ae"></div>
+        <div class="af"><label>Line 1</label><input type="text" id="ah1"></div>
+        <div class="af"><label>Line 2 (outline)</label><input type="text" id="ah2"></div>
+        <div class="af"><label>Line 3 (green)</label><input type="text" id="ah3"></div>
+        <div class="af full"><label>Subheading</label><input type="text" id="asub"></div>
+      </div>
+    </div>
+    <div class="as"><div class="ast">Services</div><div id="asl"></div><div class="a-row"><button class="a-add" onclick="addSvc()">+ Add Service</button></div></div>
+    <div class="as"><div class="ast">How It Works Steps</div><div id="ahiwl"></div><div class="a-row"><button class="a-add" onclick="addHiw()">+ Add Step</button></div></div>
+    <div class="as"><div class="ast">Portfolio Items</div><div id="apl"></div><div class="a-row"><button class="a-add" onclick="addPort()">+ Add Item</button></div></div>
+    <div class="as"><div class="ast">Testimonials</div><div id="atl"></div><div class="a-row"><button class="a-add" onclick="addTesti()">+ Add Review</button></div></div>
+    <div class="as"><div class="ast">Monthly Plans</div><div id="aml"></div><div class="a-row"><button class="a-add" onclick="addPlan('monthly')">+ Add Plan</button></div></div>
+    <div class="as"><div class="ast">One-Time Projects</div><div id="aol"></div><div class="a-row"><button class="a-add" onclick="addPlan('onetime')">+ Add Project</button></div></div>
+    <div class="as"><div class="ast">Add-Ons</div><div id="aal"></div><div class="a-row"><button class="a-add" onclick="addAddon()">+ Add Add-On</button></div></div>
+    <div class="as"><div class="ast">FAQ</div><div id="afql"></div><div class="a-row"><button class="a-add" onclick="addFaq()">+ Add Question</button></div></div>
+    <div class="as"><div class="ast">About</div>
+      <div class="ag">
+        <div class="af full"><label>Heading</label><input type="text" id="aabh"></div>
+        <div class="af full"><label>Paragraph 1</label><textarea id="aab1" rows="3"></textarea></div>
+        <div class="af full"><label>Paragraph 2</label><textarea id="aab2" rows="3"></textarea></div>
+      </div>
+    </div>
+    <div class="as"><div class="ast">Contact &amp; Payment</div>
+      <div class="ag">
+        <div class="af"><label>Email</label><input type="text" id="ace"></div>
+        <div class="af"><label>Phone</label><input type="text" id="acp"></div>
+        <div class="af"><label>Cash App URL</label><input type="text" id="aca"></div>
+        <div class="af"><label>Cash App Handle</label><input type="text" id="acah"></div>
+        <div class="af"><label>Venmo URL</label><input type="text" id="acv"></div>
+        <div class="af"><label>Venmo Handle</label><input type="text" id="acvh"></div>
+      </div>
+    </div>
+    <div class="as"><div class="ast">Change Admin Password</div>
+      <div class="ag">
+        <div class="af"><label>New Password</label><input type="password" id="anp" placeholder="Leave blank to keep current"></div>
+        <div class="af"><label>Confirm</label><input type="password" id="anp2" placeholder="Repeat new password"></div>
+      </div>
+    </div>
+    <div class="a-row">
+      <button class="a-save" onclick="saveAll()">💾 Save All Changes</button>
+      <div class="a-ok" id="aok">✓ Saved and live!</div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="logo-mark" href="#">JERMS<span>.</span></a>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#hiw">Process</a></li>
+    <li><a href="#portfolio">Work</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#booking">Book a Call</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact" class="nav-cta">Let's Talk</a></li>
+  </ul>
+  <div class="hamburger" onclick="openMobile()"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- FLOATING BUTTONS -->
+<a href="#contact" class="float-cta" id="floatCta"><div class="float-dot"></div>Book a Free Call</a>
+<a href="sms:3478820487" class="sms-btn" id="smsBtn"><span class="sms-icon">💬</span>Text Me</a>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-eyebrow" id="se">Berlin, NJ · Est. 2024</div>
+  <h1 class="hero-title">
+    <span id="sh1">YOUR BRAND.</span><br>
+    <span class="stroke" id="sh2">BUILT</span><br>
+    <span class="lime" id="sh3">DIFFERENT.</span>
+  </h1>
+  <p class="hero-sub" id="ssub">Social media, viral video, logos and websites — for local businesses ready to actually grow online.</p>
+  <div class="hero-btns">
+    <a href="#booking" class="btn-lime">Book a Free Call</a>
+    <a href="#services" class="btn-ghost">See What I Do →</a>
+  </div>
+  <div class="hero-nums">
+    <div class="hnum"><div class="hnum-val">4</div><div class="hnum-lbl">Services</div></div>
+    <div class="hnum"><div class="hnum-val">10</div><div class="hnum-lbl">Min Call</div></div>
+    <div class="hnum"><div class="hnum-val">100%</div><div class="hnum-lbl">Local Focus</div></div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker"><div class="ticker-track">
+  <span class="ticker-item">Social Media<b>✦</b></span><span class="ticker-item">Short Form Video<b>✦</b></span><span class="ticker-item">Logo Design<b>✦</b></span><span class="ticker-item">Website Creation<b>✦</b></span><span class="ticker-item">Reels &amp; TikToks<b>✦</b></span><span class="ticker-item">Brand Identity<b>✦</b></span><span class="ticker-item">Local Business Growth<b>✦</b></span><span class="ticker-item">Social Media<b>✦</b></span><span class="ticker-item">Short Form Video<b>✦</b></span><span class="ticker-item">Logo Design<b>✦</b></span><span class="ticker-item">Website Creation<b>✦</b></span><span class="ticker-item">Reels &amp; TikToks<b>✦</b></span><span class="ticker-item">Brand Identity<b>✦</b></span><span class="ticker-item">Local Business Growth<b>✦</b></span>
+</div></div>
+
+<!-- STATS -->
+<section class="stats reveal">
+  <div class="stat-item"><div class="stat-num" data-target="16">0</div><div class="stat-lbl">Years Old</div></div>
+  <div class="stat-item"><div class="stat-num" data-target="2">0</div><div class="stat-lbl">Months Running</div></div>
+  <div class="stat-item"><div class="stat-num" data-target="100">0</div><div class="stat-lbl">% Local Focus</div></div>
+  <div class="stat-item"><div class="stat-num" data-target="10">0</div><div class="stat-lbl">Min Free Call</div></div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-label">What I Do</div>
+  <h2 class="section-title reveal">Services Built<br>For Real Results.</h2>
+  <div class="svc-grid" id="ss"></div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="hiw" id="hiw">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title reveal">Simple As<br>1, 2, 3.</h2>
+  <div class="hiw-grid" id="shiw"></div>
+</section>
+
+<!-- PORTFOLIO -->
+<section class="portfolio" id="portfolio">
+  <div class="section-label">My Work</div>
+  <h2 class="section-title reveal">Results That<br>Speak Loud.</h2>
+  <div class="port-grid" id="sport"></div>
+  <p class="port-note reveal">More work coming soon — follow along on Instagram &amp; TikTok.</p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="section-label">Reviews</div>
+  <h2 class="section-title reveal">What Clients<br>Are Saying.</h2>
+  <div class="testi-outer"><div class="testi-track" id="stesti"></div></div>
+  <div class="testi-controls">
+    <button class="testi-btn" onclick="testiPrev()">←</button>
+    <button class="testi-btn" onclick="testiNext()">→</button>
+    <div class="testi-dots" id="testi-dots"></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section class="booking" id="booking">
+  <div class="booking-inner">
+    <div class="booking-left reveal">
+      <div class="section-label">Free Consultation</div>
+      <h2>BOOK YOUR<br><span>FREE CALL.</span></h2>
+      <p>Pick a time that works for you. 10 minutes, zero pressure. We'll talk about your business and figure out exactly what you need.</p>
+      <ul class="booking-perks">
+        <li>100% free, no commitment</li>
+        <li>Takes less than 10 minutes</li>
+        <li>Get a custom plan on the spot</li>
+        <li>Book instantly, no back-and-forth</li>
+      </ul>
+    </div>
+    <div class="booking-frame reveal">
+      <iframe src="https://calendly.com/jermsmedia/30min" frameborder="0" scrolling="yes" title="Book a call with Jerms Media"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-visual reveal">
+    <div class="about-box"></div>
+    <div class="about-badge">BERLIN, NJ<br>BASED</div>
+  </div>
+  <div>
+    <div class="section-label">Who's Behind It</div>
+    <h2 class="reveal" id="sabh"></h2>
+    <p class="reveal" id="sab1"></p>
+    <p class="reveal" id="sab2"></p>
+    <ul class="about-bullets reveal">
+      <li>Direct communication, no runaround</li>
+      <li>Fast turnaround on every project</li>
+      <li>Honest, affordable pricing</li>
+      <li>Invested in the Berlin, NJ community</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-label">Investment</div>
+  <h2 class="section-title reveal">Simple Pricing.<br>No Surprises.</h2>
+  <div class="pricing-tabs">
+    <button class="ptab active" onclick="switchTab('monthly')">Monthly Plans</button>
+    <button class="ptab" onclick="switchTab('onetime')">One-Time Projects</button>
+  </div>
+  <div class="pricing-panel active" id="panel-monthly">
+    <div class="plan-grid" id="sm"></div>
+    <p class="pricing-note">Billed at the start of each month. Cancel anytime with 7 days notice. <a href="#contact">Questions? Ask →</a></p>
+  </div>
+  <div class="pricing-panel" id="panel-onetime">
+    <div class="plan-grid" id="so"></div>
+    <p class="pricing-note">50% deposit to start, remainder on delivery. <a href="#contact">Custom project? Let's talk →</a></p>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="addons">
+  <div class="section-label">Add-Ons</div>
+  <h2 class="section-title reveal" style="margin-bottom:8px">Need Something Extra?</h2>
+  <p style="color:rgba(244,240,232,0.4);font-size:14px;font-weight:300;" class="reveal">Stack onto any plan or project.</p>
+  <div class="addons-grid" id="sa"></div>
+</section>
+
+<!-- FAQ -->
+<section class="faq" id="faq">
+  <div class="section-label">FAQ</div>
+  <h2 class="section-title reveal">Got Questions?<br>I Got Answers.</h2>
+  <div class="faq-list reveal" id="sfaq"></div>
+</section>
+
+<!-- PAYMENT -->
+<section class="payment" id="pay">
+  <div class="section-label">How to Pay</div>
+  <h2 class="section-title reveal">Easy Payment.<br>No Hassle.</h2>
+  <p class="pay-intro reveal">Once we agree on a project, tap below to pay. Takes 30 seconds. Always include your business name in the note!</p>
+  <div class="pay-methods reveal">
+    <a id="pca" href="https://cash.app/$Itsjerms2" target="_blank" rel="noopener" class="pay-card">
+      <div class="pay-icon">💚</div>
+      <div class="pay-info"><span class="pay-platform">Cash App</span><span class="pay-handle" id="pcah">$Itsjerms2</span></div>
+      <span class="pay-arrow">→</span>
+    </a>
+    <a id="pvm" href="https://venmo.com/u/Charles-Mortise" target="_blank" rel="noopener" class="pay-card">
+      <div class="pay-icon">💙</div>
+      <div class="pay-info"><span class="pay-platform">Venmo</span><span class="pay-handle" id="pvmh">@Charles-Mortise</span></div>
+      <span class="pay-arrow">→</span>
+    </a>
+  </div>
+  <p class="pay-note reveal"><strong>Monthly clients:</strong> Payment due the 1st of each month. | <strong>Project clients:</strong> 50% upfront, 50% on delivery. Include your business name in the note!</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-left">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="reveal">LET'S GROW<br><span>YOUR BUSINESS.</span></h2>
+    <p class="reveal">Book a free 10-minute call. No pressure, no pitch.</p>
+    <div class="contact-info reveal">
+      <a id="cel" href="mailto:jermsmedia@gmail.com"><span>✉️</span><span id="cet">jermsmedia@gmail.com</span></a>
+      <a id="cpl" href="tel:3478820487"><span>📞</span><span id="cpt">(347) 882-0487</span></a>
+      <a id="ccal" href="https://cash.app/$Itsjerms2" target="_blank"><span>💚</span>Cash App: <span id="ccat">$Itsjerms2</span></a>
+      <a id="cvml" href="https://venmo.com/u/Charles-Mortise" target="_blank"><span>💙</span>Venmo: <span id="cvmt">@Charles-Mortise</span></a>
+    </div>
+  </div>
+  <div class="reveal">
+    <form class="contact-form" id="contactForm">
+      <div class="form-row">
+        <div class="form-group"><label>Your Name</label><input type="text" id="fn" placeholder="Jane Smith" required></div>
+        <div class="form-group"><label>Business Name</label><input type="text" id="fb" placeholder="Smith's Salon" required></div>
+      </div>
+      <div class="form-group"><label>Email</label><input type="email" id="fe" placeholder="jane@yourbiz.com" required></div>
+      <div class="form-group">
+        <label>Interested In?</label>
+        <select id="fs">
+          <option value="">Select a service...</option>
+          <option>Starter Plan - $149/mo</option><option>Growth Plan - $279/mo</option><option>Full Package - $449/mo</option>
+          <option>Logo Design - $75</option><option>Website Build - $199</option><option>Brand Starter Kit - $249</option>
+          <option>Not sure - let's talk</option>
+        </select>
+      </div>
+      <div class="form-group"><label>Anything Else?</label><textarea id="fm" placeholder="Tell me about your business..."></textarea></div>
+      <button type="submit" class="form-submit">Send Message →</button>
+      <div class="form-success" id="fsuc">✓ Opening your email app! Reach me at jermsmedia@gmail.com or (347) 882-0487.</div>
+    </form>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <h2 class="reveal">READY TO<br><span>STAND OUT?</span></h2>
+  <p class="reveal">Most local businesses are invisible online. Let's make sure yours isn't.</p>
+  <a href="#booking" class="btn-lime reveal">Book Your Free Call →</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">JERMS<span>.</span></div>
+  <p>© 2024 Jerms Media · Berlin, NJ</p>
+  <div class="footer-links">
+    <a href="https://cash.app/$Itsjerms2" target="_blank">Cash App</a>
+    <a href="https://venmo.com/u/Charles-Mortise" target="_blank">Venmo</a>
+    <a href="mailto:jermsmedia@gmail.com">Email</a>
+    <a href="tel:3478820487">Call</a>
+  </div>
+</footer>
+
+<script>
+/* LOADER */
+var fill=document.getElementById('loaderFill'),pct=0;
+var lt=setInterval(function(){
+  pct+=Math.random()*18;
+  if(pct>=100){pct=100;clearInterval(lt);setTimeout(function(){document.getElementById('loader').classList.add('hide');},300);}
+  fill.style.width=pct+'%';
+},120);
+
+/* MOBILE MENU */
+function openMobile(){document.getElementById('mobileMenu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobileMenu').classList.remove('open');document.body.style.overflow='';}
+
+/* DEFAULT DATA */
+var DEF={
+  creds:{u:'jeremiah',p:'jerms2024'},
+  hero:{e:'Berlin, NJ · Est. 2024',h1:'YOUR BRAND.',h2:'BUILT',h3:'DIFFERENT.',sub:'Social media, viral video, logos and websites — for local businesses ready to actually grow online.'},
+  about:{h:"I'm Jeremiah.<br>I Make Local<br>Brands Pop.",p1:'At 16, I started Jerms Media because I saw local businesses getting left behind online. I knew I could fix that.',p2:'You talk directly to me — no agency, no middleman. Fast, affordable, and built for small businesses.'},
+  con:{email:'jermsmedia@gmail.com',phone:'(347) 882-0487',ca:'https://cash.app/$Itsjerms2',vm:'https://venmo.com/u/Charles-Mortise',cah:'$Itsjerms2',vmh:'@Charles-Mortise'},
+  svcs:[
+    {i:'📱',t:'Social Media Management',d:'Consistent posting, content planning, and community management so your pages stay active and growing — without you lifting a finger.'},
+    {i:'🎬',t:'Short Form Video',d:'Scroll-stopping Reels and TikToks that put your business in front of thousands of local customers. Filmed, edited, and posted for you.'},
+    {i:'✏️',t:'Logo Design',d:"A sharp, professional logo that makes your brand look like it means business. First impressions matter — let's make yours count."},
+    {i:'💻',t:'Website Creation',d:"Clean, fast, mobile-ready websites that convert visitors into customers. No fluff — just a site that works as hard as you do."}
+  ],
+  hiw:[
+    {i:'📞',t:'Book a Free Call',d:"We jump on a quick 10-minute call. You tell me about your business and what you need. Zero pressure, zero commitment."},
+    {i:'🎯',t:'We Make a Plan',d:"I put together a simple, custom plan for your business. We agree on what to do, the price, and the timeline. Easy."},
+    {i:'🚀',t:'You Grow',d:"I get to work. You sit back and watch your online presence grow while you focus on running your business."}
+  ],
+  port:[
+    {tag:'Social Media',t:'Sample Instagram Page',d:'Consistent content, branded graphics',ph:'📱'},
+    {tag:'Video',t:'Sample Reel',d:'Short-form video content',ph:'🎬'},
+    {tag:'Logo',t:'Sample Logo Design',d:'Clean, professional branding',ph:'✏️'},
+    {tag:'Website',t:'Sample Website',d:'Fast, mobile-ready site',ph:'💻'},
+    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐'},
+    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐'}
+  ],
+  testis:[
+    {stars:5,text:"Just getting started — but I'm hungry, local, and ready to put in the work for your business. Book a free call and let's talk.",name:'Jeremiah',biz:'Jerms Media · Berlin, NJ'},
+  ],
+  monthly:[
+    {b:'Starter',p:'$149',c:'/ month',hot:false,f:['Social media management','3 posts per week','Basic graphics & captions','1 platform (IG or FB)','Monthly performance recap']},
+    {b:'⭐ Most Popular',p:'$279',c:'/ month',hot:true,f:['Social media management','5 posts per week','4 Reels or TikToks','2 platforms covered','Custom graphics included','Priority response time']},
+    {b:'Full Package',p:'$449',c:'/ month',hot:false,f:['Everything in Growth','8 Reels or TikToks','All platforms managed','Website maintenance','Full brand content strategy','Weekly check-in calls']}
+  ],
+  onetime:[
+    {b:'Logo Design',p:'$75',c:'one-time',hot:false,f:['2 initial concepts','2 rounds of revisions','Final files PNG + SVG','Delivered in 3–5 days']},
+    {b:'⭐ Website Build',p:'$199',c:'one-time',hot:true,f:['Custom designed website','Mobile responsive','Contact form included','Free hosting setup help','Delivered in 5–7 days']},
+    {b:'Brand Starter Kit',p:'$249',c:'one-time',hot:false,f:['Logo design','Custom website','Color palette & fonts','Social profile setup','Best value bundle']}
+  ],
+  addons:[
+    {n:'Extra Reel / TikTok',p:'$25'},{n:'Extra Logo Revision',p:'$20'},
+    {n:'Additional Web Page',p:'$50'},{n:'Local Content Shoot',p:'$60'},
+    {n:'Rush Delivery (48hr)',p:'+$40'},{n:'Social Media Audit',p:'$35'}
+  ],
+  faq:[
+    {q:'Do I need to sign a contract?',a:'No long-term contracts. Monthly clients can cancel with 7 days notice. For one-time projects, we just agree on the scope and price upfront — simple as that.'},
+    {q:'How fast will I see results?',a:'Most clients see increased engagement within the first 2–3 weeks. Real growth in followers and leads usually kicks in around the 1–2 month mark as content builds momentum.'},
+    {q:'Do you work with businesses outside Berlin, NJ?',a:'Absolutely. Most of my work is done remotely, so I can work with businesses anywhere in South Jersey and beyond.'},
+    {q:'What do you need from me to get started?',a:'Just your business info, logo (if you have one), and access to your social accounts. I handle everything else from there.'},
+    {q:"Can I see examples of your work first?",a:"Yes — check out the portfolio section above. I'm also happy to share more examples on our free call."},
+    {q:'How do I pay?',a:'Cash App or Venmo. Super easy. For monthly plans, payment is due on the 1st. For projects, I take 50% upfront and 50% when the work is done.'}
+  ]
+};
+
+function gl(k,d){try{var v=localStorage.getItem('jm_'+k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function sl(k,v){try{localStorage.setItem('jm_'+k,JSON.stringify(v));}catch(e){}}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+var D={
+  creds:gl('creds',DEF.creds),hero:gl('hero',DEF.hero),about:gl('about',DEF.about),
+  con:gl('con',DEF.con),svcs:gl('svcs',DEF.svcs),hiw:gl('hiw',DEF.hiw),
+  port:gl('port',DEF.port),testis:gl('testis',DEF.testis),
+  monthly:gl('monthly',DEF.monthly),onetime:gl('onetime',DEF.onetime),
+  addons:gl('addons',DEF.addons),faq:gl('faq',DEF.faq)
+};
+
+function render(){
+  var h=D.hero,c=D.con;
+  document.getElementById('se').textContent=h.e;
+  document.getElementById('sh1').textContent=h.h1;
+  document.getElementById('sh2').textContent=h.h2;
+  document.getElementById('sh3').textContent=h.h3;
+  document.getElementById('ssub').textContent=h.sub;
+  document.getElementById('sabh').innerHTML=D.about.h;
+  document.getElementById('sab1').textContent=D.about.p1;
+  document.getElementById('sab2').textContent=D.about.p2;
+  document.getElementById('cel').href='mailto:'+c.email;document.getElementById('cet').textContent=c.email;
+  document.getElementById('cpl').href='tel:'+c.phone.replace(/\D/g,'');document.getElementById('cpt').textContent=c.phone;
+  document.getElementById('pca').href=c.ca;document.getElementById('pcah').textContent=c.cah;
+  document.getElementById('ccal').href=c.ca;document.getElementById('ccat').textContent=c.cah;
+  document.getElementById('pvm').href=c.vm;document.getElementById('pvmh').textContent=c.vmh;
+  document.getElementById('cvml').href=c.vm;document.getElementById('cvmt').textContent=c.vmh;
+  document.getElementById('ss').innerHTML=D.svcs.map(function(s,i){return '<div class="svc-card reveal"><div class="svc-bg-num">0'+(i+1)+'</div><span class="svc-icon">'+s.i+'</span><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+'</p></div>';}).join('');
+  document.getElementById('shiw').innerHTML=D.hiw.map(function(s,i){return '<div class="hiw-step reveal"><div class="hiw-num">0'+(i+1)+'</div><span class="hiw-icon">'+s.i+'</span><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+'</p></div>';}).join('');
+  document.getElementById('sport').innerHTML=D.port.map(function(p){return '<div class="port-card reveal"><span class="port-tag">'+esc(p.tag)+'</span><div class="port-thumb"><div class="port-ph"><span class="port-ph-icon">'+p.ph+'</span><div class="port-ph-txt">'+esc(p.t)+'</div></div></div><div class="port-overlay"><h4>'+esc(p.t)+'</h4><p>'+esc(p.d)+'</p></div></div>';}).join('');
+  var ti=D.testis;
+  document.getElementById('stesti').innerHTML=ti.map(function(t,i){return '<div class="testi-card'+(i===0?' active':'')+'"><div class="testi-stars">'+('★').repeat(t.stars)+'</div><p class="testi-text">"'+esc(t.text)+'"</p><div class="testi-author"><div class="testi-av">'+esc(t.name.charAt(0))+'</div><div><div class="testi-name">'+esc(t.name)+'</div><div class="testi-biz">'+esc(t.biz)+'</div></div></div></div>';}).join('');
+  document.getElementById('testi-dots').innerHTML=ti.map(function(_,i){return '<div class="testi-dot'+(i===0?' active':'')+'\" onclick="testiGo('+i+')"></div>';}).join('');
+  testiIdx=0;
+  document.getElementById('sm').innerHTML=D.monthly.map(ph).join('');
+  document.getElementById('so').innerHTML=D.onetime.map(ph).join('');
+  document.getElementById('sa').innerHTML=D.addons.map(function(a){return '<div class="addon"><span class="addon-name">'+esc(a.n)+'</span><span class="addon-price">'+esc(a.p)+'</span></div>';}).join('');
+  document.getElementById('sfaq').innerHTML=D.faq.map(function(f,i){return '<div class="faq-item" id="faq-'+i+'"><div class="faq-q" onclick="toggleFaq('+i+')"><h3>'+esc(f.q)+'</h3><div class="faq-icon">+</div></div><div class="faq-a"><div class="faq-a-inner"><p>'+esc(f.a)+'</p></div></div></div>';}).join('');
+  reObs();
+}
+
+function ph(p){return '<div class="plan-card'+(p.hot?' hot':'')+' reveal"><div class="plan-badge">'+esc(p.b)+'</div><div class="plan-price">'+esc(p.p)+'</div><div class="plan-cycle">'+esc(p.c)+'</div><ul class="plan-features">'+p.f.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul><a href="#booking" class="plan-btn">Get Started</a></div>';}
+
+/* STATS COUNTER */
+function animateStats(){
+  document.querySelectorAll('.stat-num').forEach(function(el){
+    var target=parseInt(el.getAttribute('data-target')),cur=0,inc=Math.ceil(target/40);
+    var t=setInterval(function(){cur+=inc;if(cur>=target){cur=target;clearInterval(t);}el.textContent=cur+(target===100?'%':'+');},40);
+  });
+}
+
+var testiIdx=0;
+function testiGo(i){var cards=document.querySelectorAll('.testi-card');var dots=document.querySelectorAll('.testi-dot');if(!cards.length)return;testiIdx=Math.max(0,Math.min(i,cards.length-1));var track=document.getElementById('stesti');var w=cards[0].offsetWidth+16;track.style.transform='translateX(-'+(testiIdx*w)+'px)';cards.forEach(function(c,j){c.classList.toggle('active',j===testiIdx);});dots.forEach(function(d,j){d.classList.toggle('active',j===testiIdx);});}
+function testiNext(){var cards=document.querySelectorAll('.testi-card');testiGo((testiIdx+1)%cards.length);}
+function testiPrev(){var cards=document.querySelectorAll('.testi-card');testiGo((testiIdx-1+cards.length)%cards.length);}
+function toggleFaq(i){var el=document.getElementById('faq-'+i);var wasOpen=el.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(x){x.classList.remove('open');});if(!wasOpen)el.classList.add('open');}
+function switchTab(t){document.querySelectorAll('.ptab').forEach(function(x,i){x.classList.toggle('active',(i===0&&t==='monthly')||(i===1&&t==='onetime'));});document.getElementById('panel-monthly').classList.toggle('active',t==='monthly');document.getElementById('panel-onetime').classList.toggle('active',t==='onetime');}
+
+/* SECRET ADMIN */
+var jPressed=false,jTimer=null;
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA')return;
+  if(e.key.toLowerCase()==='j'){jPressed=true;clearTimeout(jTimer);document.getElementById('keyToast').classList.add('show');jTimer=setTimeout(function(){jPressed=false;document.getElementById('keyToast').classList.remove('show');},2000);}
+  else if(e.key.toLowerCase()==='m'&&jPressed){jPressed=false;clearTimeout(jTimer);document.getElementById('keyToast').classList.remove('show');openLogin();}
+});
+function openLogin(){document.getElementById('loginModal').classList.add('open');setTimeout(function(){document.getElementById('lu').focus();},80);}
+function closeLogin(){document.getElementById('loginModal').classList.remove('open');document.getElementById('lerr').style.display='none';}
+function doLogin(){var u=document.getElementById('lu').value.trim(),p=document.getElementById('lp').value;if(u===D.creds.u&&p===D.creds.p){closeLogin();popAdmin();document.getElementById('adminOverlay').classList.add('open');document.body.style.overflow='hidden';}else{document.getElementById('lerr').style.display='block';}}
+function closeAdmin(){document.getElementById('adminOverlay').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('lp').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+document.getElementById('lu').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
+
+function popAdmin(){var h=D.hero,c=D.con;document.getElementById('ae').value=h.e;document.getElementById('ah1').value=h.h1;document.getElementById('ah2').value=h.h2;document.getElementById('ah3').value=h.h3;document.getElementById('asub').value=h.sub;document.getElementById('aabh').value=D.about.h;document.getElementById('aab1').value=D.about.p1;document.getElementById('aab2').value=D.about.p2;document.getElementById('ace').value=c.email;document.getElementById('acp').value=c.phone;document.getElementById('aca').value=c.ca;document.getElementById('acah').value=c.cah;document.getElementById('acv').value=c.vm;document.getElementById('acvh').value=c.vmh;rAS();rAHiw();rAPort();rATesti();rAP('monthly');rAP('onetime');rAA();rAFaq();}
+function rAS(){document.getElementById('asl').innerHTML=D.svcs.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Service '+(i+1)+'</span><button class="a-del" onclick="dI(\'svcs\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.svcs['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.svcs['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.svcs['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
+function rAHiw(){document.getElementById('ahiwl').innerHTML=D.hiw.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Step '+(i+1)+'</span><button class="a-del" onclick="dI(\'hiw\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.hiw['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.hiw['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.hiw['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
+function rAPort(){document.getElementById('apl').innerHTML=D.port.map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Item '+(i+1)+'</span><button class="a-del" onclick="dI(\'port\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Tag</label><input type="text" value="'+esc(p.tag)+'" onchange="D.port['+i+'].tag=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(p.t)+'" onchange="D.port['+i+'].t=this.value"></div><div class="af"><label>Description</label><input type="text" value="'+esc(p.d)+'" onchange="D.port['+i+'].d=this.value"></div><div class="af"><label>Icon/Emoji</label><input type="text" value="'+esc(p.ph)+'" onchange="D.port['+i+'].ph=this.value"></div></div></div>';}).join('');}
+function rATesti(){document.getElementById('atl').innerHTML=D.testis.map(function(t,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Review '+(i+1)+'</span><button class="a-del" onclick="dI(\'testis\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(t.name)+'" onchange="D.testis['+i+'].name=this.value"></div><div class="af"><label>Business</label><input type="text" value="'+esc(t.biz)+'" onchange="D.testis['+i+'].biz=this.value"></div><div class="af full"><label>Review Text</label><textarea rows="3" onchange="D.testis['+i+'].text=this.value">'+esc(t.text)+'</textarea></div></div></div>';}).join('');}
+function rAP(k){var el=k==='monthly'?'aml':'aol';document.getElementById(el).innerHTML=D[k].map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">'+esc(p.b||'Plan '+(i+1))+'</span><button class="a-del" onclick="dI(\''+k+'\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Badge</label><input type="text" value="'+esc(p.b)+'" onchange="D[\''+k+'\']['+i+'].b=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(p.p)+'" onchange="D[\''+k+'\']['+i+'].p=this.value"></div><div class="af"><label>Cycle</label><input type="text" value="'+esc(p.c)+'" onchange="D[\''+k+'\']['+i+'].c=this.value"></div><div class="af"><label>Featured (green)?</label><select onchange="D[\''+k+'\']['+i+'].hot=this.value===\'true\'"><option value="false"'+(p.hot?'':' selected')+'>No</option><option value="true"'+(p.hot?' selected':'')+'>Yes</option></select></div><div class="af full"><label>Features (one per line)</label><textarea rows="5" onchange="D[\''+k+'\']['+i+'].f=this.value.split(\'\\n\').filter(Boolean)">'+esc(p.f.join('\n'))+'</textarea></div></div></div>';}).join('');}
+function rAA(){document.getElementById('aal').innerHTML=D.addons.map(function(a,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Add-On '+(i+1)+'</span><button class="a-del" onclick="dI(\'addons\','+i+')">✕</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(a.n)+'" onchange="D.addons['+i+'].n=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(a.p)+'" onchange="D.addons['+i+'].p=this.value"></div></div></div>';}).join('');}
+function rAFaq(){document.getElementById('afql').innerHTML=D.faq.map(function(f,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Q '+(i+1)+'</span><button class="a-del" onclick="dI(\'faq\','+i+')">✕</button></div><div class="ag"><div class="af full"><label>Question</label><input type="text" value="'+esc(f.q)+'" onchange="D.faq['+i+'].q=this.value"></div><div class="af full"><label>Answer</label><textarea rows="3" onchange="D.faq['+i+'].a=this.value">'+esc(f.a)+'</textarea></div></div></div>';}).join('');}
+function addSvc(){D.svcs.push({i:'⭐',t:'New Service',d:'Describe this service.'});rAS();}
+function addHiw(){D.hiw.push({i:'🔥',t:'New Step',d:'Describe this step.'});rAHiw();}
+function addPort(){D.port.push({tag:'New',t:'New Item',d:'Description',ph:'📸'});rAPort();}
+function addTesti(){D.testis.push({stars:5,text:'Great work!',name:'Client Name',biz:'Business Name'});rATesti();}
+function addPlan(k){D[k].push({b:'New Plan',p:'$0',c:'/ month',hot:false,f:['Feature 1']});rAP(k);}
+function addAddon(){D.addons.push({n:'New Add-On',p:'$0'});rAA();}
+function addFaq(){D.faq.push({q:'New question?',a:'Answer here.'});rAFaq();}
+function dI(k,i){D[k].splice(i,1);if(k==='svcs')rAS();else if(k==='hiw')rAHiw();else if(k==='port')rAPort();else if(k==='testis')rATesti();else if(k==='addons')rAA();else if(k==='faq')rAFaq();else rAP(k);}
+function saveAll(){D.hero={e:document.getElementById('ae').value,h1:document.getElementById('ah1').value,h2:document.getElementById('ah2').value,h3:document.getElementById('ah3').value,sub:document.getElementById('asub').value};D.about={h:document.getElementById('aabh').value,p1:document.getElementById('aab1').value,p2:document.getElementById('aab2').value};D.con={email:document.getElementById('ace').value,phone:document.getElementById('acp').value,ca:document.getElementById('aca').value,vm:document.getElementById('acv').value,cah:document.getElementById('acah').value,vmh:document.getElementById('acvh').value};var np=document.getElementById('anp').value,np2=document.getElementById('anp2').value;if(np&&np===np2)D.creds.p=np;['creds','hero','about','con','svcs','hiw','port','testis','monthly','onetime','addons','faq'].forEach(function(k){sl(k,D[k]);});render();var m=document.getElementById('aok');m.style.display='block';setTimeout(function(){m.style.display='none';},3000);}
+
+/* CURSOR */
+var cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing'),mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=(mx-5)+'px';cur.style.top=(my-5)+'px';});
+(function ar(){rx+=(mx-rx-17)*0.12;ry+=(my-ry-17)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(ar);})();
+document.querySelectorAll('a,button').forEach(function(el){el.addEventListener('mouseenter',function(){cur.style.transform='scale(2.5)';ring.style.transform='scale(1.4)';});el.addEventListener('mouseleave',function(){cur.style.transform='scale(1)';ring.style.transform='scale(1)';});});
+
+/* SCROLL */
+var statsAnimated=false;
+window.addEventListener('scroll',function(){
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('floatCta').classList.toggle('show',window.scrollY>600);
+  document.getElementById('smsBtn').classList.toggle('show',window.scrollY>600);
+  if(!statsAnimated){var s=document.querySelector('.stats');if(s&&s.getBoundingClientRect().top<window.innerHeight){statsAnimated=true;animateStats();}}
+});
+
+function reObs(){
+  var obs=new IntersectionObserver(function(entries){entries.forEach(function(e,i){if(e.isIntersecting)setTimeout(function(){e.target.classList.add('visible');},i*70);});},{threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(function(el){el.classList.remove('visible');obs.observe(el);});
+}
+
+/* CONTACT FORM */
+document.getElementById('contactForm').addEventListener('submit',function(e){
+  e.preventDefault();
+  var n=document.getElementById('fn').value,b=document.getElementById('fb').value,em=document.getElementById('fe').value,sv=document.getElementById('fs').value,msg=document.getElementById('fm').value;
+  var sub=encodeURIComponent('New Inquiry — '+b);
+  var body=encodeURIComponent('Name: '+n+'\nBusiness: '+b+'\nEmail: '+em+'\nService: '+sv+'\n\nMessage:\n'+msg);
+  window.location.href='mailto:'+D.con.email+'?subject='+sub+'&body='+body;
+  document.getElementById('fsuc').style.display='block';
+});
+
+render();
+</script>
+</body>
+</html>
