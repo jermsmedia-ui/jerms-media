@@ -328,6 +328,9 @@ footer p{font-size:12px;color:var(--muted);}
     <div class="as"><div class="ast">Add-Ons</div><div id="aal"></div><div class="a-row"><button class="a-add" onclick="addAddon()">+ Add Add-On</button></div></div>
     <div class="as"><div class="ast">FAQ</div><div id="afql"></div><div class="a-row"><button class="a-add" onclick="addFaq()">+ Add Question</button></div></div>
     <div class="as"><div class="ast">About</div><div class="ag"><div class="af full"><label>Heading</label><input type="text" id="aabh"></div><div class="af full"><label>Paragraph 1</label><textarea id="aab1" rows="3"></textarea></div><div class="af full"><label>Paragraph 2</label><textarea id="aab2" rows="3"></textarea></div></div></div>
+    <div class="as"><div class="ast">Stats Bar</div><div class="ag"><div class="af"><label>Stat 1 Label</label><input type="text" id="as1l"></div><div class="af"><label>Stat 1 Number</label><input type="text" id="as1n"></div><div class="af"><label>Stat 2 Label</label><input type="text" id="as2l"></div><div class="af"><label>Stat 2 Number</label><input type="text" id="as2n"></div><div class="af"><label>Stat 3 Label</label><input type="text" id="as3l"></div><div class="af"><label>Stat 3 Number</label><input type="text" id="as3n"></div><div class="af"><label>Stat 4 Label</label><input type="text" id="as4l"></div><div class="af"><label>Stat 4 Number</label><input type="text" id="as4n"></div></div></div>
+    <div class="as"><div class="ast">Booking Section</div><div class="ag"><div class="af full"><label>Heading Line 1</label><input type="text" id="abh1"></div><div class="af full"><label>Heading Line 2 (green)</label><input type="text" id="abh2"></div><div class="af full"><label>Description</label><textarea id="abd" rows="3"></textarea></div><div class="af full"><label>Calendly Link</label><input type="text" id="abcal"></div></div></div>
+    <div class="as"><div class="ast">Footer</div><div class="ag"><div class="af"><label>Footer Year</label><input type="text" id="afy"></div><div class="af"><label>Footer Text</label><input type="text" id="aft"></div></div></div>
     <div class="as"><div class="ast">Contact and Payment</div><div class="ag"><div class="af"><label>Email</label><input type="text" id="ace"></div><div class="af"><label>Phone</label><input type="text" id="acp"></div><div class="af"><label>Cash App URL</label><input type="text" id="aca"></div><div class="af"><label>Cash App Handle</label><input type="text" id="acah"></div><div class="af"><label>Venmo URL</label><input type="text" id="acv"></div><div class="af"><label>Venmo Handle</label><input type="text" id="acvh"></div></div></div>
     <div class="as"><div class="ast">Change Password</div><div class="ag"><div class="af"><label>New Password</label><input type="password" id="anp" placeholder="Leave blank to keep current"></div><div class="af"><label>Confirm</label><input type="password" id="anp2"></div></div></div>
     <div class="a-row"><button class="a-save" onclick="saveAll()">Save All Changes</button><div class="a-ok" id="aok">Saved!</div></div>
@@ -412,8 +415,8 @@ footer p{font-size:12px;color:var(--muted);}
   <div class="booking-inner">
     <div class="booking-left reveal">
       <div class="section-label">Free Consultation</div>
-      <h2>BOOK YOUR<br><span>FREE CALL.</span></h2>
-      <p>Pick a time that works for you. 10 minutes, zero pressure. We will talk about your business and figure out exactly what you need.</p>
+      <h2><span id="bh1">BOOK YOUR</span><br><span id="bh2" style="color:var(--lime)">FREE CALL.</span></h2>
+      <p id="bdesc">Pick a time that works for you. 10 minutes, zero pressure. We will talk about your business and figure out exactly what you need.</p>
       <ul class="booking-perks">
         <li>100% free, no commitment</li>
         <li>Takes less than 10 minutes</li>
@@ -423,7 +426,7 @@ footer p{font-size:12px;color:var(--muted);}
     </div>
     <div class="booking-right reveal">
       <p>Click below to pick a time that works for you. Takes 30 seconds.</p>
-      <a href="https://calendly.com/jermsmedia/30min" target="_blank" class="btn-lime">Pick a Time →</a>
+      <a id="bcal" href="https://calendly.com/jermsmedia/30min" target="_blank" class="btn-lime">Pick a Time →</a>
     </div>
   </div>
 </section>
@@ -533,7 +536,7 @@ footer p{font-size:12px;color:var(--muted);}
 
 <footer>
   <div class="footer-logo">JERMS<span>.</span></div>
-  <p>2024 Jerms Media · Berlin, NJ</p>
+  <p id="ftxt">2026 Jerms Media · Berlin, NJ</p>
   <div class="footer-links">
     <a href="https://cash.app/$Itsjerms2" target="_blank">Cash App</a>
     <a href="https://venmo.com/u/Charles-Mortise" target="_blank">Venmo</a>
@@ -571,12 +574,12 @@ var DEF={
     {i:'🚀',t:'You Grow',d:'I get to work. You sit back and watch your online presence grow while you focus on running your business.'}
   ],
   port:[
-    {tag:'Social Media',t:'Sample Instagram Page',d:'Consistent content, branded graphics',ph:'📱'},
-    {tag:'Video',t:'Sample Reel',d:'Short-form video content',ph:'🎬'},
-    {tag:'Logo',t:'Sample Logo Design',d:'Clean, professional branding',ph:'✏️'},
-    {tag:'Website',t:'Sample Website',d:'Fast, mobile-ready site',ph:'💻'},
-    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐'},
-    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐'}
+    {tag:'Website',t:'Hood Meals',d:'Full website build for southern catering brand in Berlin, NJ',ph:'💻',url:'https://hoodmeals-gif.github.io/Hoodmeals/',img:'',video:''},
+    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐',url:'',img:'',video:''},
+    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐',url:'',img:'',video:''},
+    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐',url:'',img:'',video:''},
+    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐',url:'',img:'',video:''},
+    {tag:'Coming Soon',t:'Your Business Here',d:'Real work coming soon',ph:'⭐',url:'',img:'',video:''}
   ],
   testis:[
     {stars:5,text:'Just getting started but I am hungry, local, and ready to put in the work for your business. Book a free call and lets talk.',name:'Jeremiah',biz:'Jerms Media - Berlin, NJ'}
@@ -596,6 +599,9 @@ var DEF={
     {n:'Additional Web Page',p:'$50'},{n:'Local Content Shoot',p:'$60'},
     {n:'Rush Delivery 48hr',p:'+$40'},{n:'Social Media Audit',p:'$35'}
   ],
+  stats:{s1n:'16',s1l:'Years Old',s2n:'2',s2l:'Months Running',s3n:'100',s3l:'% Local Focus',s4n:'10',s4l:'Min Free Call'},
+  booking:{h1:'BOOK YOUR',h2:'FREE CALL.',desc:'Pick a time that works for you. 10 minutes, zero pressure. We will talk about your business and figure out exactly what you need.',cal:'https://calendly.com/jermsmedia/30min'},
+  footer:{year:'2026',text:'Jerms Media · Berlin, NJ'},
   faq:[
     {q:'Do I need to sign a contract?',a:'No long-term contracts. Monthly clients can cancel with 7 days notice. For one-time projects, we just agree on the scope and price upfront.'},
     {q:'How fast will I see results?',a:'Most clients see increased engagement within the first 2-3 weeks. Real growth in followers and leads usually kicks in around the 1-2 month mark.'},
@@ -615,7 +621,8 @@ var D={
   con:gl('con',DEF.con),svcs:gl('svcs',DEF.svcs),hiw:gl('hiw',DEF.hiw),
   port:gl('port',DEF.port),testis:gl('testis',DEF.testis),
   monthly:gl('monthly',DEF.monthly),onetime:gl('onetime',DEF.onetime),
-  addons:gl('addons',DEF.addons),faq:gl('faq',DEF.faq)
+  addons:gl('addons',DEF.addons),faq:gl('faq',DEF.faq),
+  stats:gl('stats',DEF.stats),booking:gl('booking',DEF.booking),footer:gl('footer',DEF.footer)
 };
 
 function render(){
@@ -628,6 +635,19 @@ function render(){
   document.getElementById('sabh').innerHTML=D.about.h;
   document.getElementById('sab1').textContent=D.about.p1;
   document.getElementById('sab2').textContent=D.about.p2;
+  // Stats
+  var st=D.stats;
+  document.querySelectorAll('.stat-num')[0].setAttribute('data-target',st.s1n);document.querySelectorAll('.stat-lbl')[0].textContent=st.s1l;
+  document.querySelectorAll('.stat-num')[1].setAttribute('data-target',st.s2n);document.querySelectorAll('.stat-lbl')[1].textContent=st.s2l;
+  document.querySelectorAll('.stat-num')[2].setAttribute('data-target',st.s3n);document.querySelectorAll('.stat-lbl')[2].textContent=st.s3l;
+  document.querySelectorAll('.stat-num')[3].setAttribute('data-target',st.s4n);document.querySelectorAll('.stat-lbl')[3].textContent=st.s4l;
+  // Booking
+  document.getElementById('bh1').textContent=D.booking.h1;
+  document.getElementById('bh2').textContent=D.booking.h2;
+  document.getElementById('bdesc').textContent=D.booking.desc;
+  document.getElementById('bcal').href=D.booking.cal;
+  // Footer
+  document.getElementById('ftxt').textContent=D.footer.year+' '+D.footer.text;
   document.getElementById('cel').href='mailto:'+c.email;document.getElementById('cet').textContent=c.email;
   document.getElementById('cpl').href='tel:'+c.phone.replace(/\D/g,'');document.getElementById('cpt').textContent=c.phone;
   document.getElementById('pca').href=c.ca;document.getElementById('pcah').textContent=c.cah;
@@ -636,7 +656,18 @@ function render(){
   document.getElementById('cvml').href=c.vm;document.getElementById('cvmt').textContent=c.vmh;
   document.getElementById('ss').innerHTML=D.svcs.map(function(s,i){return '<div class="svc-card reveal"><div class="svc-bg-num">0'+(i+1)+'</div><span class="svc-icon">'+s.i+'</span><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+'</p></div>';}).join('');
   document.getElementById('shiw').innerHTML=D.hiw.map(function(s,i){return '<div class="hiw-step reveal"><div class="hiw-num">0'+(i+1)+'</div><span class="hiw-icon">'+s.i+'</span><h3>'+esc(s.t)+'</h3><p>'+esc(s.d)+'</p></div>';}).join('');
-  document.getElementById('sport').innerHTML=D.port.map(function(p){return '<div class="port-card reveal"><span class="port-tag">'+esc(p.tag)+'</span><div class="port-thumb"><div class="port-ph"><span class="port-ph-icon">'+p.ph+'</span><div class="port-ph-txt">'+esc(p.t)+'</div></div></div><div class="port-overlay"><h4>'+esc(p.t)+'</h4><p>'+esc(p.d)+'</p></div></div>';}).join('');
+  document.getElementById('sport').innerHTML=D.port.map(function(p){
+    var media='';
+    if(p.video){media='<video src="'+esc(p.video)+'" autoplay muted loop playsinline style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"></video>';}
+    else if(p.img){media='<img src="'+esc(p.img)+'" alt="'+esc(p.t)+'" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">';}
+    else{media='<div class="port-ph"><span class="port-ph-icon">'+p.ph+'</span><div class="port-ph-txt">'+esc(p.t)+'</div></div>';}
+    var card='<div class="port-card reveal" '+(p.url?'onclick="window.open(\''+esc(p.url)+'\',\'_blank\')" style="cursor:pointer;"':'')+'>'+
+      '<span class="port-tag">'+esc(p.tag)+'</span>'+
+      '<div class="port-thumb">'+media+'</div>'+
+      '<div class="port-overlay"><h4>'+esc(p.t)+'</h4><p>'+esc(p.d)+'</p>'+(p.url?'<span style="font-size:11px;margin-top:8px;color:rgba(0,0,0,0.5)">Click to view →</span>':'')+
+      '</div></div>';
+    return card;
+  }).join('');
   var ti=D.testis;
   document.getElementById('stesti').innerHTML=ti.map(function(t,i){return '<div class="testi-card'+(i===0?' active':'')+'"><div class="testi-stars">'+('★').repeat(t.stars)+'</div><p class="testi-text">"'+esc(t.text)+'"</p><div class="testi-author"><div class="testi-av">'+esc(t.name.charAt(0))+'</div><div><div class="testi-name">'+esc(t.name)+'</div><div class="testi-biz">'+esc(t.biz)+'</div></div></div></div>';}).join('');
   document.getElementById('testi-dots').innerHTML=ti.map(function(_,i){return '<div class="testi-dot'+(i===0?' active':'')+'\" onclick="testiGo('+i+')"></div>';}).join('');
@@ -671,23 +702,45 @@ function closeAdmin(){document.getElementById('adminOverlay').classList.remove('
 document.getElementById('lp').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 document.getElementById('lu').addEventListener('keydown',function(e){if(e.key==='Enter')doLogin();});
 
-function popAdmin(){var h=D.hero,c=D.con;document.getElementById('ae').value=h.e;document.getElementById('ah1').value=h.h1;document.getElementById('ah2').value=h.h2;document.getElementById('ah3').value=h.h3;document.getElementById('asub').value=h.sub;document.getElementById('aabh').value=D.about.h;document.getElementById('aab1').value=D.about.p1;document.getElementById('aab2').value=D.about.p2;document.getElementById('ace').value=c.email;document.getElementById('acp').value=c.phone;document.getElementById('aca').value=c.ca;document.getElementById('acah').value=c.cah;document.getElementById('acv').value=c.vm;document.getElementById('acvh').value=c.vmh;rAS();rAHiw();rAPort();rATesti();rAP('monthly');rAP('onetime');rAA();rAFaq();}
+function popAdmin(){var h=D.hero,c=D.con,st=D.stats,bk=D.booking,ft=D.footer;
+  document.getElementById('ae').value=h.e;document.getElementById('ah1').value=h.h1;document.getElementById('ah2').value=h.h2;document.getElementById('ah3').value=h.h3;document.getElementById('asub').value=h.sub;
+  document.getElementById('aabh').value=D.about.h;document.getElementById('aab1').value=D.about.p1;document.getElementById('aab2').value=D.about.p2;
+  document.getElementById('ace').value=c.email;document.getElementById('acp').value=c.phone;document.getElementById('aca').value=c.ca;document.getElementById('acah').value=c.cah;document.getElementById('acv').value=c.vm;document.getElementById('acvh').value=c.vmh;
+  document.getElementById('as1n').value=st.s1n;document.getElementById('as1l').value=st.s1l;
+  document.getElementById('as2n').value=st.s2n;document.getElementById('as2l').value=st.s2l;
+  document.getElementById('as3n').value=st.s3n;document.getElementById('as3l').value=st.s3l;
+  document.getElementById('as4n').value=st.s4n;document.getElementById('as4l').value=st.s4l;
+  document.getElementById('abh1').value=bk.h1;document.getElementById('abh2').value=bk.h2;document.getElementById('abd').value=bk.desc;document.getElementById('abcal').value=bk.cal;
+  document.getElementById('afy').value=ft.year;document.getElementById('aft').value=ft.text;
+  rAS();rAHiw();rAPort();rATesti();rAP('monthly');rAP('onetime');rAA();rAFaq();}
 function rAS(){document.getElementById('asl').innerHTML=D.svcs.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Service '+(i+1)+'</span><button class="a-del" onclick="dI(\'svcs\','+i+')">X</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.svcs['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.svcs['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.svcs['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
 function rAHiw(){document.getElementById('ahiwl').innerHTML=D.hiw.map(function(s,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Step '+(i+1)+'</span><button class="a-del" onclick="dI(\'hiw\','+i+')">X</button></div><div class="ag"><div class="af"><label>Icon</label><input type="text" value="'+esc(s.i)+'" onchange="D.hiw['+i+'].i=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(s.t)+'" onchange="D.hiw['+i+'].t=this.value"></div><div class="af full"><label>Description</label><textarea rows="2" onchange="D.hiw['+i+'].d=this.value">'+esc(s.d)+'</textarea></div></div></div>';}).join('');}
-function rAPort(){document.getElementById('apl').innerHTML=D.port.map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Item '+(i+1)+'</span><button class="a-del" onclick="dI(\'port\','+i+')">X</button></div><div class="ag"><div class="af"><label>Tag</label><input type="text" value="'+esc(p.tag)+'" onchange="D.port['+i+'].tag=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(p.t)+'" onchange="D.port['+i+'].t=this.value"></div><div class="af"><label>Description</label><input type="text" value="'+esc(p.d)+'" onchange="D.port['+i+'].d=this.value"></div><div class="af"><label>Emoji</label><input type="text" value="'+esc(p.ph)+'" onchange="D.port['+i+'].ph=this.value"></div></div></div>';}).join('');}
+function rAPort(){document.getElementById('apl').innerHTML=D.port.map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Item '+(i+1)+'</span><button class="a-del" onclick="dI(\'port\','+i+')">X</button></div><div class="ag"><div class="af"><label>Tag</label><input type="text" value="'+esc(p.tag)+'" onchange="D.port['+i+'].tag=this.value"></div><div class="af"><label>Title</label><input type="text" value="'+esc(p.t)+'" onchange="D.port['+i+'].t=this.value"></div><div class="af"><label>Description</label><input type="text" value="'+esc(p.d)+'" onchange="D.port['+i+'].d=this.value"></div><div class="af"><label>Emoji (if no image)</label><input type="text" value="'+esc(p.ph)+'" onchange="D.port['+i+'].ph=this.value"></div><div class="af full"><label>Image URL (paste a link to an image)</label><input type="text" value="'+esc(p.img||'')+'" placeholder="https://..." onchange="D.port['+i+'].img=this.value"></div><div class="af full"><label>Video URL (paste a link to a video file)</label><input type="text" value="'+esc(p.video||'')+'" placeholder="https://..." onchange="D.port['+i+'].video=this.value"></div><div class="af full"><label>Link URL (clicking card opens this)</label><input type="text" value="'+esc(p.url||'')+'" placeholder="https://..." onchange="D.port['+i+'].url=this.value"></div></div></div>';}).join('');}
 function rATesti(){document.getElementById('atl').innerHTML=D.testis.map(function(t,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Review '+(i+1)+'</span><button class="a-del" onclick="dI(\'testis\','+i+')">X</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(t.name)+'" onchange="D.testis['+i+'].name=this.value"></div><div class="af"><label>Business</label><input type="text" value="'+esc(t.biz)+'" onchange="D.testis['+i+'].biz=this.value"></div><div class="af full"><label>Review Text</label><textarea rows="3" onchange="D.testis['+i+'].text=this.value">'+esc(t.text)+'</textarea></div></div></div>';}).join('');}
 function rAP(k){var el=k==='monthly'?'aml':'aol';document.getElementById(el).innerHTML=D[k].map(function(p,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">'+esc(p.b||'Plan '+(i+1))+'</span><button class="a-del" onclick="dI(\''+k+'\','+i+')">X</button></div><div class="ag"><div class="af"><label>Badge</label><input type="text" value="'+esc(p.b)+'" onchange="D[\''+k+'\']['+i+'].b=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(p.p)+'" onchange="D[\''+k+'\']['+i+'].p=this.value"></div><div class="af"><label>Cycle</label><input type="text" value="'+esc(p.c)+'" onchange="D[\''+k+'\']['+i+'].c=this.value"></div><div class="af"><label>Featured green?</label><select onchange="D[\''+k+'\']['+i+'].hot=this.value===\'true\'"><option value="false"'+(p.hot?'':' selected')+'>No</option><option value="true"'+(p.hot?' selected':'')+'>Yes</option></select></div><div class="af full"><label>Features one per line</label><textarea rows="5" onchange="D[\''+k+'\']['+i+'].f=this.value.split(\'\\n\').filter(Boolean)">'+esc(p.f.join('\n'))+'</textarea></div></div></div>';}).join('');}
 function rAA(){document.getElementById('aal').innerHTML=D.addons.map(function(a,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Add-On '+(i+1)+'</span><button class="a-del" onclick="dI(\'addons\','+i+')">X</button></div><div class="ag"><div class="af"><label>Name</label><input type="text" value="'+esc(a.n)+'" onchange="D.addons['+i+'].n=this.value"></div><div class="af"><label>Price</label><input type="text" value="'+esc(a.p)+'" onchange="D.addons['+i+'].p=this.value"></div></div></div>';}).join('');}
 function rAFaq(){document.getElementById('afql').innerHTML=D.faq.map(function(f,i){return '<div class="ac"><div class="ac-hd"><span class="ac-title">Q '+(i+1)+'</span><button class="a-del" onclick="dI(\'faq\','+i+')">X</button></div><div class="ag"><div class="af full"><label>Question</label><input type="text" value="'+esc(f.q)+'" onchange="D.faq['+i+'].q=this.value"></div><div class="af full"><label>Answer</label><textarea rows="3" onchange="D.faq['+i+'].a=this.value">'+esc(f.a)+'</textarea></div></div></div>';}).join('');}
 function addSvc(){D.svcs.push({i:'⭐',t:'New Service',d:'Describe this service.'});rAS();}
 function addHiw(){D.hiw.push({i:'🔥',t:'New Step',d:'Describe this step.'});rAHiw();}
-function addPort(){D.port.push({tag:'New',t:'New Item',d:'Description',ph:'📸'});rAPort();}
+function addPort(){D.port.push({tag:'New',t:'New Item',d:'Description',ph:'📸',url:'',img:'',video:''});rAPort();}
 function addTesti(){D.testis.push({stars:5,text:'Great work!',name:'Client Name',biz:'Business Name'});rATesti();}
 function addPlan(k){D[k].push({b:'New Plan',p:'$0',c:'/ month',hot:false,f:['Feature 1']});rAP(k);}
 function addAddon(){D.addons.push({n:'New Add-On',p:'$0'});rAA();}
 function addFaq(){D.faq.push({q:'New question?',a:'Answer here.'});rAFaq();}
 function dI(k,i){D[k].splice(i,1);if(k==='svcs')rAS();else if(k==='hiw')rAHiw();else if(k==='port')rAPort();else if(k==='testis')rATesti();else if(k==='addons')rAA();else if(k==='faq')rAFaq();else rAP(k);}
-function saveAll(){D.hero={e:document.getElementById('ae').value,h1:document.getElementById('ah1').value,h2:document.getElementById('ah2').value,h3:document.getElementById('ah3').value,sub:document.getElementById('asub').value};D.about={h:document.getElementById('aabh').value,p1:document.getElementById('aab1').value,p2:document.getElementById('aab2').value};D.con={email:document.getElementById('ace').value,phone:document.getElementById('acp').value,ca:document.getElementById('aca').value,vm:document.getElementById('acv').value,cah:document.getElementById('acah').value,vmh:document.getElementById('acvh').value};var np=document.getElementById('anp').value,np2=document.getElementById('anp2').value;if(np&&np===np2)D.creds.p=np;['creds','hero','about','con','svcs','hiw','port','testis','monthly','onetime','addons','faq'].forEach(function(k){sl(k,D[k]);});render();var m=document.getElementById('aok');m.style.display='block';setTimeout(function(){m.style.display='none';},3000);}
+function saveAll(){
+  D.hero={e:document.getElementById('ae').value,h1:document.getElementById('ah1').value,h2:document.getElementById('ah2').value,h3:document.getElementById('ah3').value,sub:document.getElementById('asub').value};
+  D.about={h:document.getElementById('aabh').value,p1:document.getElementById('aab1').value,p2:document.getElementById('aab2').value};
+  D.con={email:document.getElementById('ace').value,phone:document.getElementById('acp').value,ca:document.getElementById('aca').value,vm:document.getElementById('acv').value,cah:document.getElementById('acah').value,vmh:document.getElementById('acvh').value};
+  D.stats={s1n:document.getElementById('as1n').value,s1l:document.getElementById('as1l').value,s2n:document.getElementById('as2n').value,s2l:document.getElementById('as2l').value,s3n:document.getElementById('as3n').value,s3l:document.getElementById('as3l').value,s4n:document.getElementById('as4n').value,s4l:document.getElementById('as4l').value};
+  D.booking={h1:document.getElementById('abh1').value,h2:document.getElementById('abh2').value,desc:document.getElementById('abd').value,cal:document.getElementById('abcal').value};
+  D.footer={year:document.getElementById('afy').value,text:document.getElementById('aft').value};
+  var np=document.getElementById('anp').value,np2=document.getElementById('anp2').value;
+  if(np&&np===np2)D.creds.p=np;
+  ['creds','hero','about','con','svcs','hiw','port','testis','monthly','onetime','addons','faq','stats','booking','footer'].forEach(function(k){sl(k,D[k]);});
+  render();
+  var m=document.getElementById('aok');m.style.display='block';setTimeout(function(){m.style.display='none';},3000);
+}
 
 var cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing'),mx=0,my=0,rx=0,ry=0;
 document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;cur.style.left=(mx-5)+'px';cur.style.top=(my-5)+'px';});
